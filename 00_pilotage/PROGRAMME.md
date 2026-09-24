@@ -29,9 +29,9 @@ L'arrêté du 22 avril 2026 (BO n° 21 de 2026, référence ESRS2611873A) fixe *
 
 | Auteur | Œuvre | Passages / traduction | Confiance |
 |--------|-------|-----------------------|-----------|
-| **Platon** | *Ion* + *République*, livre X, **595a-608b** | *Ion* trad. Monique Canto-Sperber ; *République* trad. Georges Leroux (GF Flammarion) | élevée |
-| Émile **Zola** | *L'Œuvre* (1886), 14e roman des *Rougon-Macquart* | œuvre intégrale | élevée |
-| Virginia **Woolf** | *Un lieu à soi* (*A Room of One's Own*, 1929) | trad. **Marie Darrieussecq** (Denoël, 2016) | élevée |
+| **Platon** | *Ion* + *République*, livre X, **595a-608b** | *Ion* trad. Monique Canto-Sperber ; *République* trad. Georges Leroux. **Édition prescrite** : GF Flammarion « Prépas scientifiques 2026-2027 » (ISBN 978-2-08-014113-2) | élevée |
+| Émile **Zola** | *L'Œuvre* (1886), 14e roman des *Rougon-Macquart* | œuvre intégrale, texte libre de droits. Éditions « prépas 2026-2027 » : Folio classique (éd. Clément Dessy et François-Marie Mourad) ou GF Flammarion. Suis celle de ton professeur (pagination) | élevée |
+| Virginia **Woolf** | *Un lieu à soi* (*A Room of One's Own*, 1929) | trad. **Marie Darrieussecq** (parue chez Denoël en 2016). **Édition prescrite** : Folio classique n° 6764 (Gallimard), éd. Christine Reynier (ISBN 978-2-07-284008-1). À ne pas confondre avec *Une chambre à soi* (trad. Clara Malraux) | élevée |
 
 **Pourquoi les traductions comptent** : les citations doivent venir de la traduction au programme. Une phrase de Woolf ou de Platon citée dans une autre traduction n'aura pas la même formulation. Dans ce dépôt, on localise donc les passages par des **références stables** : numérotation de Stephanus pour Platon (ex. *Rép.* 597b), chapitres pour Zola, Verne et Woolf, sections pour Canguilhem. On ne recopie une citation mot pour mot qu'après l'avoir **vérifiée dans ton édition**.
 
@@ -41,12 +41,18 @@ L'arrêté du 22 avril 2026 (BO n° 21 de 2026, référence ESRS2611873A) fixe *
 |---------|---------------|-----------|
 | Durée | 4 heures | élevée (rapports de jury 2010, 2022) |
 | Structure | **Résumé** d'un texte (≤ 1 800 mots environ) en un nombre de mots imposé, **+ dissertation** dont le sujet est tiré du texte | élevée |
+| Thème du texte | Le texte se rapporte à **l'un des thèmes du programme** (cahier des charges du Français B) : les **deux thèmes** doivent être prêts | moyenne (extrait de recherche, à confirmer dans le cahier des charges 2027) |
+| Ordres de grandeur | texte de 1 400 à 1 800 mots, résumé d'environ 180 à 200 mots (session 2010 : 1 652 mots → 180) | moyenne |
 | Barème | Résumé **8 pts** + dissertation **12 pts** | élevée |
 | Tolérance | ± 10 % sur le nombre de mots | élevée |
-| Piège majeur | Un décompte de mots faux ou maquillé est **lourdement sanctionné**, pénalités pouvant aller jusqu'à annuler la note de résumé (rapport de jury) | élevée |
+| Pénalités de décompte | Le jury recompte tous les résumés : **1 point par tranche de 10 mots** hors fourchette, **doublé** si le total annoncé est faux ; ex. du jury : 40 mots de trop dissimulés = 8 points, soit toute la note du résumé | moyenne (extraits d'un rapport, 2010 semble-t-il, à confirmer dans un rapport récent) |
+| Repères sur la copie | une barre tous les 50 mots et le total exact à la fin, d'après une source secondaire | à vérifier dans un sujet récent |
+| Règle de décompte | usuelle : un mot = unité séparée par un blanc ou une apostrophe ; cas litigieux (trait d'union, « aujourd'hui », nombres) selon la consigne. Outil : `outils/compter_mots.py` | à vérifier dans la consigne |
 | Dissertation | Doit s'appuyer **essentiellement sur les œuvres au programme** | élevée |
 | Répartition du temps conseillée | ≈ 1 h 30 résumé / 2 h 30 dissertation | indicative |
 | Dates des écrits 2027 | généralement fin avril-mai : **à vérifier** dans le Livret PT 2027 | à vérifier |
+
+**Français A (Banque PT)** : il existe aussi une épreuve écrite de **Français A**, une **dissertation seule de 4 h** sur le programme, sans résumé ; des rapports de jury « Français A » sont publiés sur banquept.fr (2018 notamment). Selon des sources secondaires, seules certaines écoles l'utilisent : vérifie dans le Livret PT 2027 et le document « Coefficients » si **tes** écoles te la font passer (question Q3 de `DECISIONS.md`). Confiance : moyenne.
 
 **Autres concours** : si tu vises aussi l'X (filière PT) ou d'autres écoles hors Banque PT, vérifie s'il y a un **oral de français** (l'X publie ses rapports d'oral sur polytechnique.edu).
 
@@ -61,11 +67,25 @@ Programme :
 - Lycée du Parc : <https://lyceeduparc.fr/ldp/article1398.html>
 - Groupe Réussite (passages de Canguilhem) : <https://groupe-reussite.fr/ressources/cp-francais-theme-experiences-de-la-nature-cpge/>
 
+Éditions prescrites (vérifiées par recherche le 24/09/2026) :
+- Platon, GF : <https://editions.flammarion.com/ion-la-republique-prepas-scientifiques-2026-2027-edition-prescrite/9782080141132>
+- Woolf, Folio classique : <https://www.gallimard.fr/catalogue/un-lieu-a-soi-prepas-scientifiques-2026-2027-edition-prescrite/9782072840081>
+- Zola, Folio : <https://www.gallimard.fr/catalogue/l-oeuvre-prepas-scientifiques-2026-2027-edition-au-programme/9782072895449> ; GF : <https://editions.flammarion.com/loeuvre-prepas-scientifiques-2026-2027/9782080140210>
+
 Épreuve Banque PT :
+- Cahier des charges du Français B (version 2023) : <http://www.banquept.fr/documents/2023/cdc_ecrit/Fra_B.pdf>
+- Rapport de jury Français A 2018 : <https://www.banquept.fr/documents/ecrit/rapport/2018/rapport_fra_a_ecrit_2018.pdf>
 - Rapport de jury Français B 2022 : <https://www.banquept.fr/documents/ecrit/rapport/2022/rapport_fra_b_ecrit_2022.pdf>
 - Rapport de jury Français B 2010 : <https://www.banquept.fr/documents/ecrit/rapport/2010/rapport_fra_b_ecrit_2010.pdf>
 - Livret PT 2026 : <https://www.banquept.fr/documents/livret/2026/Livret_PT_2026.pdf>
 - Coefficients : <https://groupe-reussite.fr/ressources/coefficients-prepa-pt/>
 - X, épreuves orales PT : <https://www.polytechnique.edu/admission-cycle-ingenieur/sites/admission/files/content/Epreuves%20orales%20PT_0.pdf>
 
-> 💡 **À faire toi-même (5 min)** : télécharger sur banquept.fr les **rapports de jury Français B** des 3 dernières années et les déposer dans `ressources/rapports-jury/`. Une future session pourra alors en extraire les attentes exactes du jury (la session actuelle n'y a pas accès).
+> 💡 **À faire toi-même (10 min)** : télécharger sur banquept.fr le **cahier des charges du Français B**, les **sujets et rapports de jury** (Français B, et Français A si tu le passes) des 3 dernières années, puis les déposer dans `ressources/rapports-jury/` **une fois le dépôt passé en privé**. Une future session pourra alors en extraire les attentes exactes du jury (la session actuelle n'y a pas accès).
+
+## 5. Historique des modifications de ce fichier
+
+| Date | Modification | Origine |
+|------|--------------|---------|
+| 24/09/2026 | Création : thèmes, œuvres, épreuve Français B, sources | recherche web de la session |
+| 24/09/2026 | Ajouts : éditions prescrites (Platon GF, Woolf Folio classique n° 6764, éditions de Zola) ; thème du texte ; ordres de grandeur ; barème des pénalités ; repères ; règle de décompte ; Français A ; nouvelles sources | vérifications des agents du workflow (échantillons P3 et P4, critique « complétude »), recoupées par recherche web |

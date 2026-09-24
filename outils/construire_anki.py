@@ -1,21 +1,29 @@
 #!/usr/bin/env python3
 """Construit des paquets Anki (.apkg) à partir des fichiers TSV de flashcards du dépôt.
 
-Format attendu d'un fichier TSV (importable tel quel dans Anki, ou transformé ici en .apkg) :
+Format attendu d'un fichier TSV (importable tel quel dans Anki 2.1.55+, ou transformé ici en .apkg) :
 
     #separator:tab
     #html:true
     #tags column:3
-    Recto<TAB>Verso<TAB>tags séparés par des espaces
+    #guid column:4
+    #deck:Français PT*::Thème 2 Création::Platon
+    Recto<TAB>Verso<TAB>tags séparés par des espaces<TAB>identifiant (ex. pla-001)
+
+Les en-têtes #tags, #guid et #deck sont facultatifs.
 
 Usage :
     python3 outils/construire_anki.py                 # tous les *.tsv du dépôt
     python3 outils/construire_anki.py chemin/a.tsv    # un ou plusieurs fichiers précis
 
 Sorties : exports/anki/<nom>.apkg (un paquet par fichier) + exports/anki/francais-PT-tout.apkg.
-Les identifiants de notes sont stables (dérivés du recto) : réimporter un paquet mis à jour
-dans Anki met à jour les cartes existantes au lieu de créer des doublons, et conserve
-l'historique de révision.
+
+Identifiants : avec une colonne #guid, l'identifiant écrit dans le fichier devient celui de la
+note, exactement comme lors d'un import direct du .tsv dans Anki. Réimporter un paquet mis à
+jour met alors les cartes à jour (même si tu corriges la question ou renommes le fichier) sans
+doublon et sans perdre l'historique de révision, TANT QUE L'IDENTIFIANT NE CHANGE PAS.
+Sans colonne #guid, l'identifiant est dérivé du paquet et du recto : corriger un recto crée
+alors une nouvelle carte (le script le signale).
 
 Dépendance : pip install genanki
 """
@@ -66,36 +74,58 @@ MODELE = genanki.Model(
 
 
 def lire_tsv(chemin: pathlib.Path):
-    """Renvoie la liste (recto, verso, tags) d'un fichier TSV ; signale les lignes mal formées."""
-    cartes, erreurs = [], []
+    """Lit un fichier TSV de cartes.
+
+    Renvoie (en-têtes, cartes, erreurs) ; chaque carte est un tuple (recto, verso, tags, guid ou None).
+    """
+    entetes = {"tags": None, "guid": None, "deck": None}
+    cartes, erreurs, guids_vus = [], [], set()
     for num, ligne in enumerate(chemin.read_text(encoding="utf-8").splitlines(), start=1):
-        if not ligne.strip() or ligne.startswith("#"):
+        if not ligne.strip():
+            continue
+        if ligne.startswith("#"):
+            cle, _, valeur = ligne[1:].partition(":")
+            cle, valeur = cle.strip().lower(), valeur.strip()
+            if cle in ("tags column", "guid column") and valeur.isdigit():
+                entetes[cle.split()[0]] = int(valeur) - 1
+            elif cle == "deck" and valeur:
+                entetes["deck"] = valeur
             continue
         champs = ligne.split("\t")
-        if len(champs) not in (2, 3) or not champs[0].strip() or not champs[1].strip():
-            erreurs.append(f"{chemin.name}:{num} : {len(champs)} colonne(s) ou champ vide")
+        attendu = max(2, *(i + 1 for i in (entetes["tags"], entetes["guid"]) if i is not None))
+        if len(champs) != attendu or not champs[0].strip() or not champs[1].strip():
+            erreurs.append(f"{chemin.name}:{num} : {len(champs)} colonne(s) au lieu de {attendu}, ou champ vide")
             continue
-        tags = champs[2].split() if len(champs) == 3 else []
-        cartes.append((champs[0].strip(), champs[1].strip(), tags))
-    return cartes, erreurs
+        tags = champs[entetes["tags"]].split() if entetes["tags"] is not None else []
+        guid = champs[entetes["guid"]].strip() if entetes["guid"] is not None else None
+        if entetes["guid"] is not None:
+            if not guid or guid in guids_vus:
+                erreurs.append(f"{chemin.name}:{num} : identifiant vide ou en double ({guid!r})")
+                continue
+            guids_vus.add(guid)
+        cartes.append((champs[0].strip(), champs[1].strip(), tags, guid))
+    return entetes, cartes, erreurs
 
 
-def nom_paquet(chemin: pathlib.Path) -> str:
-    return f"{DECK_RACINE}::{chemin.stem.replace('_', ' ')}"
+def nom_paquet(chemin: pathlib.Path, entetes) -> str:
+    return entetes["deck"] or f"{DECK_RACINE}::{chemin.stem.replace('_', ' ')}"
 
 
 def construire(fichiers):
     SORTIE.mkdir(parents=True, exist_ok=True)
     tous_les_paquets, total, toutes_erreurs = [], 0, []
     for chemin in fichiers:
-        cartes, erreurs = lire_tsv(chemin)
+        entetes, cartes, erreurs = lire_tsv(chemin)
         toutes_erreurs += erreurs
-        nom = nom_paquet(chemin)
+        nom = nom_paquet(chemin, entetes)
+        if entetes["guid"] is None:
+            print(f"ℹ {chemin.name} : pas de colonne #guid, identifiants dérivés du recto "
+                  "(corriger un recto créera une nouvelle carte dans Anki)")
         paquet = genanki.Deck(ident_stable(nom), nom)
-        for recto, verso, tags in cartes:
+        for recto, verso, tags, guid in cartes:
             paquet.add_note(genanki.Note(
                 model=MODELE, fields=[recto, verso], tags=tags,
-                guid=genanki.guid_for(nom, recto),
+                guid=guid or genanki.guid_for(nom, recto),
             ))
         cible = SORTIE / f"{chemin.stem}.apkg"
         genanki.Package(paquet).write_to_file(str(cible))

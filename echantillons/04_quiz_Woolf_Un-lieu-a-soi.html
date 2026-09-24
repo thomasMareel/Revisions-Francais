@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz · Un lieu à soi</title>
+<meta name="description" content="Quiz interactif de 23 questions (QCM, vrai ou faux, réponses à taper, remise en ordre, indice de confiance) sur Virginia Woolf, Un lieu à soi (trad. Marie Darrieussecq) : thème « Les arcanes de la création », concours 2027. Échantillon généré le 24/09/2026.">
+<link rel="icon" href="data:,">
+<!--
+  ÉCHANTILLON / prototype, généré le 24/09/2026, à valider.
+  Fichier autonome : aucune ressource externe (ni CDN, ni police web), fonctionne hors ligne.
+
+  RÉUTILISER LE MOTEUR POUR UNE AUTRE ŒUVRE
+  1. Copie ce fichier (ex. 05_quiz_Zola_L-Oeuvre.html).
+  2. Modifie l'en-tête (encadré) et la section « Points à vérifier » dans le HTML.
+  3. Remplace uniquement le bloc QUIZ (premier <script>) : id, puis la liste des questions.
+     Le second <script> (le moteur) ne change pas.
+  Limite connue : chaque copie duplique le moteur. Une correction du moteur doit donc être
+  reportée dans chaque quiz, tant qu'un script d'assemblage (données + moteur unique) n'existe pas.
+-->
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f7f4ee;
+    --surface: #ffffff;
+    --surface-2: #f1ece3;
+    --text: #1d1b18;
+    --muted: #5a544b;
+    --border: #d8cfc1;
+    --border-strong: #9c9180;
+    --accent: #9a3b17;
+    --accent-hover: #7c2e10;
+    --on-accent: #ffffff;
+    --accent-soft: #f7e6dc;
+    --ok: #1d6b39;
+    --ok-bg: #e4f3e8;
+    --ok-border: #3d8b57;
+    --ok-fill: #2f6f45;
+    --on-ok-fill: #ffffff;
+    --ko: #a3261c;
+    --ko-bg: #fbe8e5;
+    --ko-border: #c4574c;
+    --ko-fill: #a8382e;
+    --on-ko-fill: #ffffff;
+    --focus: #1f4fd1;
+    --shadow: 0 1px 2px rgba(40, 30, 20, .06), 0 6px 20px rgba(40, 30, 20, .06);
+    --radius: 14px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #17161a;
+      --surface: #211f25;
+      --surface-2: #2a2830;
+      --text: #eeebe5;
+      --muted: #b6b0a6;
+      --border: #3c3943;
+      --border-strong: #6f6a76;
+      --accent: #f0a37a;
+      --accent-hover: #f6bb9a;
+      --on-accent: #1d1410;
+      --accent-soft: #3a2a22;
+      --ok: #8fdca8;
+      --ok-bg: #16301f;
+      --ok-border: #4fa36b;
+      --ok-fill: #4fa36b;
+      --on-ok-fill: #10151a;
+      --ko: #f4a097;
+      --ko-bg: #3a1a17;
+      --ko-border: #d0665b;
+      --ko-fill: #d0665b;
+      --on-ko-fill: #10151a;
+      --focus: #8ab4ff;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 20px rgba(0, 0, 0, .25);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #17161a;
+    --surface: #211f25;
+    --surface-2: #2a2830;
+    --text: #eeebe5;
+    --muted: #b6b0a6;
+    --border: #3c3943;
+    --border-strong: #6f6a76;
+    --accent: #f0a37a;
+    --accent-hover: #f6bb9a;
+    --on-accent: #1d1410;
+    --accent-soft: #3a2a22;
+    --ok: #8fdca8;
+    --ok-bg: #16301f;
+    --ok-border: #4fa36b;
+    --ok-fill: #4fa36b;
+    --on-ok-fill: #10151a;
+    --ko: #f4a097;
+    --ko-bg: #3a1a17;
+    --ko-border: #d0665b;
+    --ko-fill: #d0665b;
+    --on-ko-fill: #10151a;
+    --focus: #8ab4ff;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 20px rgba(0, 0, 0, .25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 1rem/1.55 var(--sans);
+    overflow-wrap: break-word;
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 0 16px; }
+  [hidden] { display: none !important; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* ---------- En-tête ---------- */
+  .skip {
+    position: absolute; left: 16px; top: -100px; z-index: 10;
+    padding: 8px 12px; border-radius: 8px;
+    background: var(--accent); color: var(--on-accent); font-weight: 700; text-decoration: none;
+  }
+  .skip:focus { top: 8px; }
+  .site-head { padding: 14px 0 4px; }
+  h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.45rem, 3.5vw + 1rem, 2.2rem);
+    line-height: 1.12;
+  }
+  .sub { margin: 4px 0 10px; color: var(--muted); font-size: .92rem; }
+  .encadre {
+    margin: 0 0 14px;
+    padding: 9px 12px;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    background: var(--surface-2);
+    font-size: .84rem;
+  }
+  .encadre p { margin: 0 0 3px; line-height: 1.4; }
+  .encadre details { margin-top: 2px; }
+  .encadre summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+  .encadre details p { margin: 4px 0 0; }
+
+  /* ---------- Carte du quiz ---------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px 14px 18px;
+    scroll-margin-top: 10px;
+  }
+  @media (min-width: 560px) { .card { padding: 22px 24px 24px; } }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+    font-size: .88rem;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--text); font-variant-numeric: tabular-nums; }
+  .mode {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .track {
+    margin: 8px 0 14px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .fill {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width .25s ease;
+  }
+
+  .reprise {
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    border: 1px dashed var(--accent);
+    border-radius: 10px;
+    background: var(--accent-soft);
+    font-size: .92rem;
+  }
+  .reprise p { margin: 0 0 8px; }
+
+  .q-type {
+    margin: 0 0 4px;
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .question {
+    margin: 0 0 14px;
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 1vw + 1rem, 1.3rem);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .options { display: grid; gap: 9px; }
+  .opt {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 10px;
+    align-items: start;
+    width: 100%;
+    min-height: 48px;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: .97rem;
+    line-height: 1.42;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color .15s ease, border-color .15s ease;
+  }
+  .opt:hover:not([aria-disabled="true"]) { border-color: var(--accent); background: var(--accent-soft); }
+  .opt[aria-disabled="true"] { cursor: default; }
+  .letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: .9rem;
+  }
+  .opt-body { display: block; padding-top: 3px; min-width: 0; }
+  .status { display: block; margin-top: 4px; font-size: .85rem; font-weight: 700; }
+  .opt[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+  .opt[aria-pressed="true"] .letter { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+  .opt.is-correct { border-color: var(--ok-border); background: var(--ok-bg); box-shadow: none; }
+  .opt.is-correct .letter { border-color: var(--ok-fill); background: var(--ok-fill); color: var(--on-ok-fill); }
+  .opt.is-correct .status { color: var(--ok); }
+  .opt.is-wrong { border-color: var(--ko-border); background: var(--ko-bg); box-shadow: none; }
+  .opt.is-wrong .letter { border-color: var(--ko-fill); background: var(--ko-fill); color: var(--on-ko-fill); }
+  .opt.is-wrong .status { color: var(--ko); }
+  .opt.is-dim { color: var(--muted); border-color: var(--border); background: var(--surface); box-shadow: none; }
+  .opt.is-dim .letter { border-color: var(--border); background: transparent; color: var(--muted); }
+
+  /* Réponse à taper */
+  .saisie {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: 1rem; /* 16 px : évite le zoom automatique sur iPhone */
+  }
+  .saisie:focus-visible { outline-offset: 1px; }
+  .saisie.is-correct { border-color: var(--ok-border); background: var(--ok-bg); }
+  .saisie.is-wrong { border-color: var(--ko-border); background: var(--ko-bg); }
+  .aide { margin: 6px 2px 0; font-size: .84rem; color: var(--muted); }
+
+  /* Remise en ordre */
+  .ordre { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .ordre li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-items: center;
+    padding: 6px 6px 6px 10px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 10px;
+    background: var(--surface);
+    font-size: .95rem;
+    line-height: 1.38;
+  }
+  .ordre .rang { flex: 0 0 auto; min-width: 1.2em; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .ordre .ordre-texte { flex: 1 1 9em; min-width: 0; overflow-wrap: anywhere; }
+  .ordre .fleches { flex: 0 0 auto; display: flex; gap: 4px; margin-left: auto; }
+  .fleche {
+    width: 44px; height: 44px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 8px;
+    background: var(--surface-2);
+    color: var(--text);
+    font: inherit; font-size: 1.1rem; font-weight: 700;
+    cursor: pointer;
+  }
+  .fleche:disabled { opacity: .35; cursor: default; }
+  .ordre li.is-correct { border-color: var(--ok-border); background: var(--ok-bg); }
+  .ordre li.is-wrong { border-color: var(--ko-border); background: var(--ko-bg); }
+  .ordre li .marque { flex: 0 0 auto; margin-left: auto; font-weight: 700; padding-right: 6px; }
+  .ordre li.is-correct .marque { color: var(--ok); }
+  .ordre li.is-wrong .marque { color: var(--ko); }
+
+  /* Indice de confiance */
+  .confiance { margin-top: 14px; }
+  .confiance-label { margin: 0 0 6px; font-size: .9rem; color: var(--muted); }
+  .conf-btns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5em), 1fr)); gap: 8px; }
+  .btn-conf {
+    min-height: 46px;
+    padding: 6px 3px;
+    border: 1.5px solid var(--accent);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--accent);
+    font: inherit;
+    font-weight: 700;
+    font-size: .92rem;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+  }
+  .btn-conf:hover:not(:disabled) { background: var(--accent-soft); }
+  .btn-conf:disabled { border-color: var(--border); color: var(--muted); cursor: default; }
+  .btn-conf[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-left: 4px solid var(--border-strong);
+    border-radius: 0 10px 10px 0;
+    background: var(--surface-2);
+  }
+  .feedback:empty { display: none; }
+  .feedback.ok { border-left-color: var(--ok-border); background: var(--ok-bg); }
+  .feedback.ko { border-left-color: var(--ko-border); background: var(--ko-bg); }
+  .feedback .verdict { margin: 0 0 6px; font-weight: 700; }
+  .feedback.ok .verdict { color: var(--ok); }
+  .feedback.ko .verdict { color: var(--ko); }
+  .feedback p { margin: 0 0 6px; }
+  .feedback ol { margin: 0 0 8px; padding-left: 1.3rem; }
+  .alerte { font-weight: 700; }
+  .pourquoi, .dissert { font-size: .94rem; }
+  .dissert b, .pourquoi b { color: var(--text); }
+  .feedback .ref { margin: 0; font-size: .86rem; color: var(--muted); }
+  .feedback .ref b { color: var(--text); }
+
+  .actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 16px; }
+  @media (min-width: 480px) {
+    .actions { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+  }
+  .btn {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    min-height: 48px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1.5px solid var(--accent);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease;
+  }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn-secondary { background: transparent; color: var(--accent); }
+  .btn-secondary:hover { background: var(--accent-soft); }
+  .btn-small { min-height: 44px; padding: 8px 14px; font-size: .92rem; }
+  .card-foot { margin-top: 12px; text-align: right; }
+  .lien {
+    min-height: 44px;
+    padding: 8px 4px;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: .86rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .hint { margin: 10px 2px 0; font-size: .82rem; color: var(--muted); }
+  @media (hover: none) and (pointer: coarse) { .hint { display: none; } }
+
+  /* ---------- Résultat ---------- */
+  .result-title { margin: 0 0 6px; font-family: var(--serif); font-size: 1.3rem; }
+  .big {
+    margin: 4px 0 2px;
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 8vw + 1rem, 3.4rem);
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .big small { font-size: .45em; color: var(--muted); font-weight: 600; }
+  .pct { margin: 0 0 12px; color: var(--muted); }
+  .message { margin: 0 0 10px; }
+  .calibrage { margin: 0 0 10px; font-size: .92rem; color: var(--muted); }
+  .record {
+    margin: 0 0 4px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: var(--surface-2);
+    font-size: .92rem;
+  }
+  .record.new { background: var(--ok-bg); color: var(--ok); font-weight: 700; }
+  .errors { margin-top: 20px; }
+  .errors h3 { margin: 16px 0 8px; font-size: 1.02rem; }
+  .errors h3:first-child { margin-top: 0; }
+  .errors details {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    margin-bottom: 8px;
+  }
+  .errors details.prio { border-color: var(--ko-border); }
+  .errors summary {
+    padding: 10px 12px;
+    cursor: pointer;
+    font-family: var(--serif);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .errors details > div { padding: 0 12px 12px; font-size: .94rem; }
+  .errors details p { margin: 0 0 6px; }
+  .errors .good { color: var(--ok); font-weight: 700; }
+  .errors .mine { color: var(--ko); font-weight: 700; }
+  .none { margin: 12px 0 0; color: var(--muted); }
+
+  /* ---------- Pied de page ---------- */
+  .site-foot { margin: 28px 0 32px; font-size: .92rem; }
+  .site-foot h2 { margin: 0 0 8px; font-size: 1.05rem; font-family: var(--serif); }
+  .site-foot ul { margin: 0; padding-left: 1.2rem; }
+  .site-foot li { margin-bottom: 4px; }
+  .site-foot .small { margin-top: 12px; color: var(--muted); font-size: .84rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#quiz">Aller à la question</a>
+<div class="wrap">
+
+  <header class="site-head">
+    <h1>Un lieu à soi&nbsp;: le quiz</h1>
+    <p class="sub">Virginia Woolf · 23&nbsp;questions sur les 6&nbsp;chapitres</p>
+
+    <section class="encadre" aria-label="Présentation du document">
+      <p><b>Type&nbsp;:</b> quiz interactif (QCM, vrai ou faux, réponses à taper, remise en ordre, indice de confiance) · <b>Thème&nbsp;:</b> «&nbsp;Les arcanes de la création&nbsp;» (concours 2027)</p>
+      <p><b>Œuvre&nbsp;:</b> Virginia Woolf, <i>Un lieu à soi</i> (<i>A Room of One’s Own</i>, 1929), trad. Marie Darrieussecq (Denoël, 2016)&nbsp;; édition prescrite&nbsp;: Folio classique n°&nbsp;6764 (Gallimard, éd. Christine Reynier)</p>
+      <p><b>Statut&nbsp;:</b> ÉCHANTILLON / prototype, généré le 24/09/2026, à valider</p>
+      <details>
+        <summary>Mode d’emploi</summary>
+        <p>Réponds sans ton livre, puis valide en disant si tu es sûr, hésitant ou si tu réponds au hasard&nbsp;: les erreurs commises en étant sûr passent en tête de tes questions à revoir.<br>Lis l’explication et sa piste «&nbsp;En dissertation&nbsp;», revois tes questions jusqu’à zéro faute, puis refais le quiz complet deux ou trois jours plus tard (l’ordre change à chaque fois).</p>
+      </details>
+    </section>
+  </header>
+
+  <main>
+    <noscript>
+      <p class="card">Ce quiz a besoin de JavaScript pour fonctionner. Active-le dans ton navigateur, ou ouvre le fichier dans un autre navigateur.</p>
+    </noscript>
+
+    <!-- Écran : question -->
+    <section id="quiz" class="card" aria-label="Quiz" hidden>
+      <div class="meta">
+        <span><span id="mode" class="mode">Quiz complet</span> <span id="counter">Question <strong>1</strong> / 23</span></span>
+        <span>Score&nbsp;: <strong id="score">0</strong> · Record&nbsp;: <strong id="record-mini">—</strong></span>
+      </div>
+      <div class="track" id="progress" role="progressbar" aria-label="Progression du quiz" aria-valuemin="0" aria-valuemax="23" aria-valuenow="0">
+        <div class="fill" id="fill"></div>
+      </div>
+
+      <div id="reprise" class="reprise" hidden>
+        <p id="reprise-texte"></p>
+        <button type="button" id="reprise-btn" class="btn btn-secondary btn-small">Reprendre mes questions à revoir</button>
+      </div>
+
+      <p id="q-type" class="q-type"></p>
+      <h2 id="q-text" class="question" tabindex="-1"></h2>
+      <div id="zone"></div>
+
+      <div id="confiance" class="confiance" role="group" aria-labelledby="confiance-label">
+        <p id="confiance-label" class="confiance-label"></p>
+        <div class="conf-btns">
+          <button type="button" class="btn-conf" data-conf="sur">Sûr</button>
+          <button type="button" class="btn-conf" data-conf="hesitant">Hésitant</button>
+          <button type="button" class="btn-conf" data-conf="hasard">Au hasard</button>
+        </div>
+      </div>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+      <p id="annonce" class="sr-only" aria-live="polite"></p>
+
+      <div class="actions">
+        <button type="button" id="next" class="btn btn-primary" hidden>Question suivante</button>
+      </div>
+      <div class="card-foot">
+        <button type="button" id="abandon" class="lien">Recommencer le quiz complet</button>
+      </div>
+    </section>
+    <p class="hint" id="hint" hidden>Au clavier&nbsp;: 1 à 4 ou A à D pour choisir (V ou F pour vrai ou faux), puis S = sûr, H = hésitant, Z = au hasard&nbsp;; Entrée pour continuer.</p>
+
+    <!-- Écran : résultat -->
+    <section id="result" class="card" aria-labelledby="result-title" hidden>
+      <h2 id="result-title" class="result-title" tabindex="-1">Ton résultat</h2>
+      <p class="big" id="final-score">0 <small>/ 23</small></p>
+      <p class="pct" id="final-pct"></p>
+      <p class="message" id="final-message"></p>
+      <p class="calibrage" id="final-calibrage"></p>
+      <p class="record" id="final-record"></p>
+
+      <div class="actions">
+        <button type="button" id="review" class="btn btn-primary">Revoir ces questions</button>
+        <button type="button" id="restart" class="btn btn-secondary">Recommencer le quiz complet</button>
+      </div>
+      <p class="none" id="no-errors" hidden>Aucune question à revoir dans cette série.</p>
+
+      <div class="errors" id="errors" hidden></div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <h2>Points à vérifier</h2>
+    <ul>
+      <li>Quiz rédigé <b>sans accès à la traduction de Darrieussecq</b>&nbsp;: le contenu a été contrôlé sur le texte anglais original, et les références sont données par chapitre (1 à 6), jamais par page. Note les pages de l’édition prescrite (Folio classique n°&nbsp;6764) à côté des questions ratées.</li>
+      <li>Édition prescrite identifiée par les pages de l’éditeur et des libraires (Folio classique n°&nbsp;6764, Gallimard, 2020, traduction et préface de M.&nbsp;Darrieussecq, éd. C.&nbsp;Reynier)&nbsp;: fais-la confirmer par ton professeur.</li>
+      <li>Une seule citation littérale&nbsp;: «&nbsp;Chloé aimait Olivia&nbsp;» (ch.&nbsp;5). L’anglais porte <i>Chloe liked Olivia</i>&nbsp;: vérifie le verbe choisi par la traductrice.</li>
+      <li>Rendus de la traduction à vérifier&nbsp;: le titre du roman de Mary Carmichael (<i>Life’s Adventure</i>), «&nbsp;Mr&nbsp;A&nbsp;», le professeur von&nbsp;X, les 500&nbsp;livres par an (de rente&nbsp;?), le livre de Trevelyan (<i>History of England</i> dans l’original), l’auteur anonyme (<i>Anon</i>), les mots «&nbsp;incandescent&nbsp;» et «&nbsp;androgyne&nbsp;», la toile d’araignée et les miroirs (les réponses à taper acceptent plusieurs variantes).</li>
+      <li>La note placée en tête de l’original (conférences lues à Newnham et à Girton en octobre 1928, puis remaniées) existe bien&nbsp;: vérifie que ton édition la reprend.</li>
+      <li>Titre de la traduction&nbsp;: dans sa préface, Darrieussecq écarte «&nbsp;chambre&nbsp;», qui fait penser à la chambre à coucher, au profit d’un lieu, d’un espace à soi (idée confirmée par une source secondaire, formulation exacte à relire). L’ancienne traduction de Clara Malraux, <i>Une chambre à soi</i>, date de 1951&nbsp;: cite toujours celle de Darrieussecq.</li>
+      <li>Les noms Mary Beton, Seton et Carmichael viennent de la ballade écossaise «&nbsp;Mary Hamilton&nbsp;» (les «&nbsp;quatre Marie&nbsp;»), que Woolf ne cite pas&nbsp;; le rapprochement avec Judith Shakespeare est une lecture critique.</li>
+      <li>Renvois aux autres œuvres (lignes «&nbsp;En dissertation&nbsp;»)&nbsp;: numéros de Stephanus contrôlés sur le texte grec-anglais de Platon, chapitres de Zola sur une traduction anglaise de <i>L’Œuvre</i>&nbsp;; à confirmer dans tes éditions.</li>
+    </ul>
+    <p class="small">Fichier autonome&nbsp;: il fonctionne hors ligne, sur téléphone comme sur ordinateur. Si rien ne réagit sur ton téléphone, c’est sans doute qu’il est ouvert dans un simple aperçu de fichier&nbsp;: ouvre-le dans ton navigateur. Ton record et tes questions à revoir sont gardés dans ce navigateur seulement (s’il le permet).</p>
+  </footer>
+</div>
+
+<!-- =====================================================================
+     1. DONNÉES DU QUIZ : c'est le seul bloc à remplacer pour une autre œuvre.
+     - id : sert de clé pour mémoriser le record et les questions à revoir.
+     - Chaque question : id (stable, sert à mémoriser les questions à revoir),
+       type, ref (localisation stable), q (énoncé), explication (2 ou 3 phrases),
+       dissertation (1 phrase : notion, croisement avec les autres œuvres).
+     - type "qcm"    : options (LA BONNE EN PREMIER : le moteur mélange).
+                       Une option peut être { t: "texte", pourquoi: "…" } :
+                       « pourquoi » s'affiche si l'élève choisit cette option.
+                       Viser des options de longueur voisine : le moteur avertit
+                       (console) si la bonne est la plus longue trop souvent.
+     - type "vf"     : reponse (true = vrai, false = faux).
+     - type "saisie" : attendu (texte affiché) ; accepte = liste de groupes :
+                       la réponse est juste si elle contient au moins une
+                       variante de CHAQUE groupe, en début de mot (sans accents
+                       ni majuscules : « miroir » reconnaît « miroirs »).
+     - type "ordre"  : items dans le BON ordre (le moteur mélange).
+     - *texte* s'affiche en italique (titres d'œuvres).
+     - Les espaces avant : ; ! ? et à l'intérieur des « » sont rendues
+       insécables automatiquement.
+     ===================================================================== -->
+<script>
+const QUIZ = {
+  id: "woolf-un-lieu-a-soi-v2",
+  questions: [
+    {
+      id: "c1-these", type: "saisie",
+      ref: "Ch. 1 (début), repris au ch. 6",
+      q: "Quelle thèse la narratrice annonce-t-elle dès les premières pages ? Complète : pour écrire de la fiction, une femme doit avoir… (deux choses)",
+      attendu: "de l’argent et une pièce à elle",
+      accepte: [["argent", "rente", "revenu", "500", "cinq cent", "money"], ["piece", "chambre", "lieu", "espace", "room", "bureau"]],
+      explication: "C’est une thèse matérialiste : l’écriture dépend de conditions concrètes, une rente (500 livres par an) et une pièce qui ferme à clé. La narratrice ne promet aucune vérité définitive sur les femmes ni sur le roman, seulement le chemin qui l’a menée à cette opinion.",
+      dissertation: "Thèse à opposer à l’*Ion*, où le poète compose non par art mais par une force divine (534b-c) : chez Woolf, pas de Muse sans rente ni serrure."
+    },
+    {
+      id: "c1-trois-sens", type: "qcm",
+      ref: "Ch. 1 (première page) ; note en tête de l’essai [à vérifier dans ton édition]",
+      q: "On lui a demandé de parler « des femmes et du roman ». Quels sens la narratrice trouve-t-elle à ce sujet ?",
+      options: [
+        "Ce que sont les femmes, les romans qu’elles écrivent, ceux qu’on écrit sur elles, ou tout cela à la fois",
+        { t: "Les lectrices de romans, les héroïnes de roman et les romancières, qu’elle étudie l’une après l’autre",
+          pourquoi: "Ce découpage n’est pas le sien, et elle ne les étudie pas séparément : elle garde les sens mêlés." },
+        "La place des femmes dans l’édition, dans la critique et dans l’enseignement de la littérature anglaise",
+        "Le roman sentimental, le roman réaliste et le roman féminin, qu’elle compare pour mieux les classer"
+      ],
+      explication: "Le sujet vient des étudiantes de Newnham et de Girton, collèges féminins de Cambridge, devant qui Woolf a parlé en octobre 1928 avant de remanier ses conférences pour le livre de 1929. Elle retient le sens le plus riche, les trois mêlés, mais y voit un défaut fatal : impossible de conclure. D’où une simple opinion sur un point mineur : l’argent et la pièce.",
+      dissertation: "Modèle de problématisation : déplier les sens d’un sujet avant d’en choisir un, et dire ce qu’on renonce à trancher. À imiter en introduction."
+    },
+    {
+      id: "c1-je-fictif", type: "qcm",
+      ref: "Ch. 1",
+      q: "La narratrice dit en substance : appelez-moi Mary Beton, Mary Seton, Mary Carmichael, peu importe. Que signifie ce flottement ?",
+      options: [
+        "Le « je » est une voix fictive, car la fiction peut dire plus de vérité que les faits",
+        { t: "Woolf publie sous plusieurs pseudonymes pour échapper à la censure des écrits féministes",
+          pourquoi: "Aucune censure n’est en jeu : les noms relèvent d’un jeu de fiction assumé devant le public." },
+        "L’essai réunit en fait les textes de trois conférencières invitées ensemble à Cambridge",
+        "Ce sont les noms de trois étudiantes de Fernham auxquelles Woolf a dédié son essai"
+      ],
+      explication: "Oxbridge et Fernham sont inventés, le « je » aussi : la narratrice use des libertés du romancier, et c’est à l’auditoire de chercher la part de vérité mêlée aux mensonges. Les noms viennent d’une ballade écossaise, « Mary Hamilton » (les « quatre Marie »), dont la chanteuse va être pendue : plusieurs critiques la rapprochent de Judith Shakespeare.",
+      dissertation: "Création et vérité : la fiction comme voie d’accès au vrai, à l’inverse de Platon, pour qui l’imitateur est au troisième rang après le roi et la vérité (*Rép.* 597e)."
+    },
+    {
+      id: "c1-oxbridge-fernham", type: "qcm",
+      ref: "Ch. 1",
+      q: "Pelouse interdite, bibliothèque fermée, déjeuner fastueux à Oxbridge, dîner maigre à Fernham : que montre cette journée ?",
+      options: [
+        "Que penser dépend du corps et de l’argent, dont les collèges de femmes manquent",
+        { t: "Que la frugalité de Fernham favorise l’étude, alors que le luxe d’Oxbridge endort",
+          pourquoi: "C’est l’inverse : on pense mal quand on a mal dîné, et le dîner de Fernham éteint la conversation." },
+        { t: "Que les deux collèges ont des ressources égales, mais des traditions différentes",
+          pourquoi: "Les ressources sont très inégales : c’est tout l’objet de la conversation avec Mary Seton." },
+        "Que la narratrice préfère la cuisine simple des femmes aux raffinements masculins"
+      ],
+      explication: "Un homme du collège la chasse du gazon, réservé aux membres du collège ; la bibliothèque n’admet une femme qu’accompagnée d’un membre ou munie d’une lettre. À Oxbridge : soles, perdreaux, vin ; à Fernham : bouillon, bœuf, pruneaux, eau. Avec son amie Mary Seton, elle en trouve la cause : les mères n’ont pu ni gagner ni léguer d’argent (Mrs Seton a eu treize enfants).",
+      dissertation: "Pour une partie sur les conditions matérielles : on pense mal quand on a mal dîné, et les lieux du savoir sont un territoire gardé."
+    },
+    {
+      id: "c2-colere", type: "qcm",
+      ref: "Ch. 2",
+      q: "Au British Museum, la narratrice lit des livres d’hommes sur les femmes. D’où vient, selon elle, la colère du professeur von X ?",
+      options: [
+        "Il défend moins l’infériorité des femmes que sa propre supériorité",
+        { t: "Ses mesures prouvent une différence réelle que le public veut nier",
+          pourquoi: "S’il avait raisonné sans passion, preuves à l’appui, elle aurait accepté le fait sans colère : ces livres sont écrits dans l’émotion, non à la lumière de la vérité." },
+        { t: "Une moquerie subie au berceau, comme le suggère la théorie freudienne",
+          pourquoi: "Elle s’amuse de cette hypothèse en dessinant sa caricature, mais ne la retient pas." },
+        "Il imite le ton polémique à la mode dans les revues savantes de son temps"
+      ],
+      explication: "Sa propre colère, elle l’explique vite : on n’aime pas s’entendre dire qu’on est naturellement inférieure. Elle note aussi qu’elle a été en colère parce qu’il l’était : un argument impartial ne l’aurait pas irritée. Reste à comprendre la colère d’un homme qui a tout le pouvoir : se croire supérieur à la moitié du genre humain lui donne confiance en lui.",
+      dissertation: "Le prétendu savoir des professeurs relève de la passion : à rapprocher de l’exigence platonicienne d’un savoir vrai, seul remède contre les images (*Rép.* 595b)."
+    },
+    {
+      id: "c2-miroir", type: "saisie",
+      ref: "Ch. 2",
+      q: "Complète l’image : depuis des siècles, les femmes ont servi aux hommes de… qui leur renvoient une image deux fois plus grande. (un objet)",
+      attendu: "miroirs (grossissants)",
+      accepte: [["miroir", "glace", "psyche"]],
+      explication: "Sans ce pouvoir de grossir l’homme, dit-elle en substance, pas de guerres glorieuses ni de conquérants. D’où l’irritation quand une femme se met à dire vrai : l’image rapetisse, et l’homme perd la confiance en soi dont il a besoin pour agir.",
+      dissertation: "Le miroir, figure platonicienne de l’imitation qui ne produit que des apparences (*Rép.* 596d-e), devient chez Woolf un instrument de domination : l’image flatte au lieu de montrer le vrai."
+    },
+    {
+      id: "c2-rente-vote", type: "vf",
+      ref: "Ch. 2",
+      q: "Vrai ou faux ? La narratrice hérite d’une rente presque au moment où les femmes obtiennent le vote : des deux, c’est la rente qui compte le plus pour elle.",
+      reponse: true,
+      explication: "Vrai. Sa tante, morte d’une chute de cheval à Bombay, lui laisse 500 livres par an ; avant, elle vivait de petits travaux (adresses d’enveloppes, lecture à de vieilles dames, fleurs artificielles, leçons à de jeunes enfants). Libérée du besoin, elle n’a plus à haïr ni à flatter les hommes : elle peut les juger librement.",
+      dissertation: "Liberté intellectuelle et argent : la rente délivre de la peur et de l’amertume, qui déforment l’œuvre (ch. 4). À croiser avec Ion, qui guette ses auditeurs en pensant à son salaire (*Ion* 535e)."
+    },
+    {
+      id: "c3-araignee", type: "saisie",
+      ref: "Ch. 3 (début)",
+      q: "Complète l’image : la fiction n’est pas un caillou tombé par terre ; elle ressemble à une… , attachée à la vie par les quatre coins.",
+      attendu: "toile d’araignée",
+      accepte: [["araignee", "toile"]],
+      explication: "Le lien est souvent invisible : les pièces de Shakespeare semblent tenir toutes seules. Mais quand la toile se déchire, on se rappelle qu’elle est l’œuvre d’êtres humains qui souffrent, attachée à des choses matérielles : la santé, l’argent, les maisons où l’on vit.",
+      dissertation: "Contre le mythe de l’œuvre tombée du ciel. À croiser avec Zola : la grande toile de Claude exige un atelier plus vaste et entame sa rente (*L’Œuvre*, ch. 9)."
+    },
+    {
+      id: "c3-trevelyan", type: "qcm",
+      ref: "Ch. 3",
+      q: "En lisant l’histoire d’Angleterre de l’historien Trevelyan, quel paradoxe la narratrice relève-t-elle ?",
+      options: [
+        "Les femmes dominent la poésie et le théâtre, mais sont presque absentes de l’histoire réelle",
+        { t: "Les femmes abondent dans les chroniques, mais disparaissent presque de la littérature",
+          pourquoi: "C’est l’inverse : omniprésente dans la fiction, la femme réelle est presque absente de l’histoire." },
+        "L’historien célèbre les reines, alors que les poètes n’ont chanté que des héros",
+        "Les femmes du Moyen Âge étaient plus libres que celles de l’époque victorienne"
+      ],
+      explication: "Clytemnestre, Antigone, Cléopâtre ou Lady Macbeth dominent la fiction écrite par des hommes, alors que la femme réelle était enfermée, battue, mariée de force. D’où un être étrange et composite : de la plus haute importance dans l’imagination, insignifiante dans les faits.",
+      dissertation: "La femme, objet de l’art plutôt que sujet créateur : à croiser avec Christine, qui s’offre comme modèle pour la grande toile de Claude (*L’Œuvre*, ch. 9)."
+    },
+    {
+      id: "c3-judith", type: "qcm",
+      ref: "Ch. 3",
+      q: "Que veut démontrer la fable de Judith, sœur imaginaire de Shakespeare ?",
+      options: [
+        "Qu’à son époque, une femme aussi douée que lui n’aurait pu ni se former ni écrire",
+        { t: "Que le vrai génie finit toujours par s’imposer, quels que soient les obstacles",
+          pourquoi: "C’est le contresens à éviter : le don de Judith ne la sauve pas, il la détruit." },
+        "Que Shakespeare a sans doute emprunté plusieurs de ses pièces à une femme de sa famille",
+        { t: "Que les femmes de son temps n’avaient aucune disposition naturelle pour le théâtre",
+          pourquoi: "Judith a le même don que son frère : ce qui lui manque, ce sont l’école, la liberté et un lieu." }
+      ],
+      explication: "Privée d’école, promise à un mariage qu’elle refuse, Judith s’enfuit à Londres ; on se moque d’elle au théâtre, l’acteur-directeur Nick Greene la prend en pitié et, enceinte de lui, elle se tue une nuit d’hiver. Expérience de pensée : ce n’est pas le talent qui a manqué aux femmes, ce sont les conditions. L’auteur anonyme de tant de poèmes (*Anon*) était sans doute souvent une femme.",
+      dissertation: "Génie et conditions : à croiser avec Claude Lantier, qui a les moyens de peindre mais se pend face à sa toile inachevée (*L’Œuvre*, ch. 12). Deux échecs, pour des raisons opposées."
+    },
+    {
+      id: "c3-hostilite", type: "vf",
+      ref: "Ch. 3",
+      q: "Vrai ou faux ? Pour la narratrice, le monde est indifférent aux hommes qui écrivent, mais hostile aux femmes qui veulent écrire.",
+      reponse: true,
+      explication: "Vrai. Pour un Keats ou un Flaubert, le monde est indifférent : il ne demande pas de poèmes et ne paie pas ce qu’il ne veut pas. À une femme, il ne dit pas d’écrire si elle veut : il lui demande en ricanant à quoi bon. S’y ajoutent les obstacles matériels, à commencer par l’absence de pièce à soi.",
+      dissertation: "Tout créateur affronte l’indifférence du public ; la femme affronte pire. Utile dans une partie sur la réception et sur ce qu’elle fait à l’œuvre."
+    },
+    {
+      id: "c3-incandescent", type: "qcm",
+      ref: "Ch. 3 (fin)",
+      q: "Quel état d’esprit la narratrice juge-t-elle le plus favorable à la création, à la fin du ch. 3 ?",
+      options: [
+        "Un esprit incandescent, où rancœurs et griefs ont été consumés, comme chez Shakespeare",
+        { t: "Un esprit en colère, car l’indignation contre l’injustice nourrit les grandes œuvres",
+          pourquoi: "C’est l’inverse : tout désir de protester ou de régler un compte fait obstacle (voir Charlotte Brontë, ch. 4)." },
+        { t: "Un esprit possédé par une force divine, qui compose sans savoir ce qu’il fait",
+          pourquoi: "C’est la thèse de l’*Ion* (534b-c), pas celle de Woolf : chez elle, l’esprit libre est le fruit de conditions." },
+        "Un esprit discipliné par une solide formation classique en latin, en grec et en rhétorique"
+      ],
+      explication: "Pour libérer l’œuvre tout entière, l’esprit de l’artiste doit être sans obstacle, sans matière étrangère non consumée. On sait peu de chose de Shakespeare parce que ses rancunes ne se voient pas : tout désir de protester ou de prêcher a brûlé, et sa poésie coule librement.",
+      dissertation: "La colère, obstacle à la création : à croiser avec *Rép.* 606d, où la poésie arrose les passions au lieu de les dessécher. Woolf veut des passions consumées dans l’œuvre."
+    },
+    {
+      id: "c4-behn", type: "saisie",
+      ref: "Ch. 4",
+      q: "Quelle autrice anglaise du XVIIe siècle, femme de la classe moyenne, a dû gagner sa vie par sa plume, à égalité avec les hommes ? (nom)",
+      attendu: "Aphra Behn",
+      accepte: [["behn", "aphra"]],
+      explication: "Avec Mrs Behn, on prend un tournant : une femme vit de son travail, ce qui compte plus que ses œuvres, car une fille peut désormais dire à ses parents qu’elle gagnera de l’argent avec sa plume. Toutes les femmes devraient fleurir sa tombe, à Westminster. « Première femme de lettres professionnelle » est une formule de la critique, que le texte suggère sans l’affirmer.",
+      dissertation: "Écrire devient un métier : la création sort du loisir aristocratique. À croiser avec Ion, qui vit des concours (*Ion* 530a) ; chez Woolf, gagner sa vie libère l’esprit au lieu de l’asservir au public."
+    },
+    {
+      id: "c4-lignee", type: "qcm",
+      ref: "Ch. 4",
+      q: "Pourquoi, selon la narratrice, Jane Austen aurait-elle dû déposer une couronne sur la tombe de Fanny Burney ?",
+      options: [
+        "Parce qu’un chef-d’œuvre suppose une lignée d’écrivains qui lui ont ouvert la voie",
+        "Parce que Fanny Burney avait payé l’impression des premiers romans de Jane Austen",
+        { t: "Parce que Jane Austen avait imité Fanny Burney avant de trouver son propre style",
+          pourquoi: "Il ne s’agit pas d’imitation, mais de ce que toute œuvre doit à celles qui l’ont précédée." },
+        "Parce que les deux romancières venaient de la même famille de pasteurs du Hampshire"
+      ],
+      explication: "Les chefs-d’œuvre ne naissent pas seuls : ils sont le fruit d’années de pensée commune, et l’expérience de la foule est derrière la voix singulière, comme Marlowe derrière Shakespeare. Or une femme pense à travers ses mères : sans tradition féminine, elle manque d’appui, jusque dans la phrase.",
+      dissertation: "La création comme héritage : à croiser avec la chaîne aimantée de l’*Ion* (533d-536d), où la force passe de la Muse au poète, au rhapsode, au public. Ici, la transmission est historique, non divine."
+    },
+    {
+      id: "c4-austen-bronte", type: "qcm",
+      ref: "Ch. 4 (renvoi à *Jane Eyre*, ch. 12)",
+      q: "Quelle différence la narratrice établit-elle entre Jane Austen et Charlotte Brontë ?",
+      options: [
+        "Austen écrit sans haine ni amertume, alors que chez Brontë la colère brise le récit",
+        { t: "Austen avait une pièce à elle et une rente, alors que Brontë écrivait en cachette",
+          pourquoi: "Austen écrivait dans le salon commun et cachait ses feuilles quand la porte grinçait." },
+        { t: "Brontë écrit avec sérénité, alors qu’Austen glisse partout sa colère contre les hommes",
+          pourquoi: "C’est l’inverse : la sérénité est du côté d’Austen, la rancœur du côté de Brontë." },
+        "Aucune, car toutes deux imitent trop fidèlement le style des romanciers masculins"
+      ],
+      explication: "Austen cachait ses manuscrits quand la porte grinçait, mais son esprit, comme celui de Shakespeare, a consumé les obstacles. Brontë, peut-être plus douée, laisse sa rancœur couper *Jane Eyre* (Jane sur le toit de Thornfield) ; George Eliot, tenue à l’écart par la réprobation du monde, n’a pu acquérir l’expérience d’un Tolstoï.",
+      dissertation: "Exemple type pour les conditions intérieures de la création : la rancœur fait dévier l’œuvre, la sérénité la laisse s’accomplir (voir l’esprit incandescent, ch. 3)."
+    },
+    {
+      id: "c4-roman-phrase", type: "qcm",
+      ref: "Ch. 4",
+      q: "Pourquoi les écrivaines du XIXe siècle se sont-elles tournées vers le roman, et quel obstacle y ont-elles trouvé ?",
+      options: [
+        "Genre jeune et souple, écrit au salon, mais la phrase héritée était faite pour les hommes",
+        "Il rapportait plus que la poésie, mais les éditeurs n’en voulaient que de sentimentaux",
+        "C’était le seul genre enseigné aux jeunes filles, mais la loi leur interdisait la politique",
+        "Il permettait l’anonymat, mais exigeait le latin et le grec qu’on leur refusait alors"
+      ],
+      explication: "Poésie et théâtre demandent une concentration et une tradition qu’on leur refusait ; le roman, genre encore jeune, se laisse façonner, et la vie au salon les formait à observer les caractères. Mais la phrase héritée, celle d’un Johnson ou d’un Gibbon, n’était pas à leur mesure : Jane Austen s’en est moquée et a forgé une phrase naturelle, à son usage.",
+      dissertation: "Créer, c’est aussi forger son instrument : la forme héritée n’est pas neutre. Mary Carmichael brisera cette phrase (ch. 5)."
+    },
+    {
+      id: "c5-carmichael", type: "qcm",
+      ref: "Ch. 5",
+      q: "Dans le premier roman de la jeune Mary Carmichael (*Life’s Adventure* dans l’original), qu’est-ce qui déroute d’abord la narratrice ?",
+      options: [
+        "L’autrice brise d’abord la phrase, puis l’ordre attendu de son récit",
+        { t: "Le roman imite si fidèlement Jane Austen qu’il en devient un pastiche",
+          pourquoi: "Au contraire : elle a brisé la phrase de Jane Austen, et aucune comparaison n’est possible." },
+        "L’autrice renonce à la fiction et livre en réalité un traité de sociologie",
+        "Le livre est signé d’un pseudonyme d’homme, comme ceux des Brontë"
+      ],
+      explication: "Elle a brisé la phrase, puis la séquence : elle en a le droit, à condition de le faire pour créer et non pour briser. Elle n’est pas un génie, mais une inconnue qui écrit son premier roman sans assez de temps ni d’argent. Donne-lui cent ans, une pièce à elle et 500 livres par an, conclut la narratrice en substance, et elle écrira un meilleur livre.",
+      dissertation: "Rupture et création : briser pour créer, non pour briser. Utile sur l’originalité, et sur le trouble du lecteur face à l’œuvre nouvelle."
+    },
+    {
+      id: "c5-chloe", type: "qcm",
+      ref: "Ch. 5",
+      q: "Pourquoi la phrase « Chloé aimait Olivia » [à vérifier dans ton édition] fait-elle date aux yeux de la narratrice ?",
+      options: [
+        "Deux femmes y sont montrées l’une avec l’autre, et non plus à travers les hommes",
+        "C’est la première héroïne qui déclare son amour à la première personne du singulier",
+        { t: "La phrase vaut à Mary Carmichael un procès pour obscénité, comme d’autres livres de 1928",
+          pourquoi: "Ce roman n’a aucun procès : l’allusion au juge Biron vise celui du *Puits de solitude*." },
+        "Elle prouve que les romancières réécrivent désormais les tragédies de Shakespeare"
+      ],
+      explication: "Jusque-là, même Cléopâtre ne voit Octavie qu’en rivale : les femmes de fiction n’existent que par rapport aux hommes. Chloé et Olivia, elles, partagent un laboratoire. L’anglais dit *Chloe liked Olivia*, verbe volontairement modeste (apprécier, aimer bien) ; mais la plaisanterie sur Sir Chartres Biron, le magistrat qui fit condamner en 1928 *Le Puits de solitude*, suggère davantage.",
+      dissertation: "L’art peut révéler ce qu’il n’a jamais montré : argument contre l’idée platonicienne d’un art qui copie des apparences déjà là (*Rép.* 598b)."
+    },
+    {
+      id: "c5-oublier-son-sexe", type: "vf",
+      ref: "Ch. 5 ; ch. 6",
+      q: "Vrai ou faux ? Pour la narratrice, une romancière doit écrire en pensant sans cesse qu’elle est une femme, pour défendre la cause des femmes.",
+      reponse: false,
+      explication: "Faux. Mary Carmichael a appris la première leçon : elle écrit en femme, mais en femme qui a oublié qu’elle en est une. Au ch. 6, la narratrice va plus loin : il est fatal, pour qui écrit, de penser à son sexe ou de plaider une cause, même juste ; une œuvre écrite avec ce parti pris ne peut pas grandir dans l’esprit des autres.",
+      dissertation: "Création et engagement : pour Woolf, l’œuvre qui plaide se fane. À confronter à Platon, qui n’admet dans la cité que les hymnes aux dieux et les éloges des gens de bien (*Rép.* 607a)."
+    },
+    {
+      id: "c6-androgyne", type: "qcm",
+      ref: "Ch. 6",
+      q: "Que désigne l’« esprit androgyne » que la narratrice emprunte à Coleridge ?",
+      options: [
+        "Un esprit où la part masculine et la part féminine s’unissent et travaillent ensemble",
+        { t: "Un esprit neutre, qui écrit comme s’il n’avait ni corps, ni histoire, ni point de vue",
+          pourquoi: "Contresens fréquent : l’androgynie n’efface pas les différences, elle les unit." },
+        { t: "Un esprit féminin supérieur, appelé à remplacer toute la tradition masculine",
+          pourquoi: "Coleridge ne parle pas d’un esprit qui prend le parti des femmes ; un esprit purement féminin ne crée pas mieux qu’un esprit purement masculin." },
+        "Un esprit qui alterne, d’un chapitre à l’autre, un style d’homme et un style de femme"
+      ],
+      explication: "L’idée naît d’une scène de rue : un homme et une femme montent ensemble dans un taxi, et l’esprit semble retrouver son unité. Quand cette fusion se fait, l’esprit est fécondé et use de toutes ses facultés. Shakespeare en est le modèle, alors que chez un romancier trop viril (« Mr A »), l’ombre du « je » barre la page.",
+      dissertation: "Définition de l’esprit créateur : unité et fécondité intérieures, à l’opposé du poète de l’*Ion*, qui ne crée que hors de lui-même, privé de raison (534b)."
+    },
+    {
+      id: "c6-reel", type: "vf",
+      ref: "Ch. 6 (fin)",
+      q: "Vrai ou faux ? La « pièce à soi » est avant tout un refuge pour se retirer du monde.",
+      reponse: false,
+      explication: "Faux. Demander aux femmes de gagner de l’argent et d’avoir une pièce à elles, c’est leur demander de vivre en présence de la réalité, que l’écrivain a pour tâche de trouver et de communiquer. La serrure figure le pouvoir de penser par soi-même, et la narratrice les pousse aussi à voyager, à flâner, à écrire toutes sortes de livres.",
+      dissertation: "Création et réel : lire *Le Roi Lear* ou *Emma*, dit-elle en substance, fait voir le monde plus intensément. Utile pour défendre la valeur de vérité de l’art."
+    },
+    {
+      id: "c6-fin", type: "qcm",
+      ref: "Ch. 6 (dernière page)",
+      q: "Sur quelle image l’essai se clôt-il ?",
+      options: [
+        "Judith Shakespeare vit en chaque femme et renaîtra si l’on travaille pour elle",
+        "Une bibliothèque d’Oxbridge enfin ouverte aux femmes, où la narratrice lit librement",
+        { t: "La narratrice confie aux étudiantes le roman qu’elle n’a pas su achever",
+          pourquoi: "Elle ne parle d’aucun roman inachevé : elle appelle ses auditrices à écrire toutes sortes de livres." },
+        "Un hommage à Jane Austen, modèle que toute romancière devrait désormais imiter"
+      ],
+      explication: "Juste avant, elle traduit ses symboles : les 500 livres figurent le pouvoir de contempler, la serrure celui de penser par soi-même. Les grands poètes ne meurent pas : si les femmes ont un jour rente, pièce et courage d’écrire ce qu’elles pensent, la poétesse morte prendra corps, nourrie de la vie des inconnues qui l’ont précédée.",
+      dissertation: "Conclusion rêvée sur la création : l’œuvre à venir naît d’un travail collectif et patient, non d’un miracle. À opposer à Tynnichos, auteur d’un seul beau poème par don divin (*Ion* 534d)."
+    },
+    {
+      id: "t-argument", type: "ordre",
+      ref: "Ch. 1 à 6",
+      q: "Remets dans l’ordre les grandes étapes de l’argument, du ch. 1 au ch. 6.",
+      items: [
+        "Oxbridge : pelouse interdite, déjeuner fastueux, puis dîner maigre à Fernham",
+        "British Museum : livres d’hommes en colère, puis l’héritage de la tante",
+        "L’histoire d’Angleterre de Trevelyan et la fable de Judith Shakespeare",
+        "Des grandes dames isolées à Aphra Behn, puis aux romancières du XIXe siècle",
+        "Le premier roman de Mary Carmichael",
+        "Le couple du taxi, l’esprit androgyne, puis Judith qui renaîtra"
+      ],
+      explication: "Chaque chapitre ajoute un étage : conditions matérielles (ch. 1-2), histoire des femmes empêchées (ch. 3), lignée des écrivaines (ch. 4), présent de l’écriture des femmes (ch. 5), théorie de l’esprit créateur et appel final (ch. 6). Retrouver cette progression, c’est l’exercice même du résumé : suivre un raisonnement, pas une liste d’anecdotes.",
+      dissertation: "En copie, présente l’essai comme un raisonnement qui va des conditions matérielles à l’esprit créateur, pas comme une réserve d’anecdotes."
+    }
+  ]
+};
+</script>
+
+<!-- =====================================================================
+     2. MOTEUR DU QUIZ : réutilisable tel quel, ne dépend que de QUIZ.
+     ===================================================================== -->
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Outils ---------- */
+  var LETTRES = ["A", "B", "C", "D", "E", "F"];
+  var CONFIANCES = { sur: "sûr", hesitant: "hésitant", hasard: "au hasard" };
+  var TYPES = { qcm: "Choix multiple", vf: "Vrai ou faux", saisie: "Réponse à taper", ordre: "Remets dans l’ordre" };
+  var byId = function (id) { return document.getElementById(id); };
+
+  function melanger(tab) {
+    for (var i = tab.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = tab[i]; tab[i] = tab[j]; tab[j] = t;
+    }
+    return tab;
+  }
+
+  // Typographie française : espaces insécables avant : ; ! ? et dans les « ».
+  function typo(texte) {
+    return String(texte)
+      .replace(/«\s*/g, "«\u00a0")
+      .replace(/\s*»/g, "\u00a0»")
+      .replace(/\s+([:;!?])/g, "\u00a0$1");
+  }
+
+  // Remplit un élément avec du texte ; *passage* devient <em>passage</em>.
+  function ecrire(el, texte) {
+    el.textContent = "";
+    typo(texte).split("*").forEach(function (morceau, i) {
+      if (!morceau) return;
+      if (i % 2 === 1) {
+        var em = document.createElement("em");
+        em.textContent = morceau;
+        el.appendChild(em);
+      } else {
+        el.appendChild(document.createTextNode(morceau));
+      }
+    });
+  }
+
+  function creer(tag, classe, texte) {
+    var el = document.createElement(tag);
+    if (classe) el.className = classe;
+    if (texte !== undefined) ecrire(el, texte);
+    return el;
+  }
+
+  function sansEtoiles(texte) { return typo(texte).replace(/\*/g, ""); }
+
+  // Normalisation des réponses tapées : minuscules, sans accents ni ponctuation.
+  function normaliser(texte) {
+    return String(texte).toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, " ").trim();
+  }
+  // Une variante est reconnue si elle figure en début de mot (« miroir » reconnaît « miroirs »).
+  function contientVariante(reponse, variante) {
+    return (" " + normaliser(reponse)).indexOf(" " + normaliser(variante)) >= 0;
+  }
+
+  function mouvementReduit() {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  /* ---------- Stockage local (facultatif : la page marche sans) ---------- */
+  var ID = QUIZ.id || "sans-id";
+  function lireJSON(cle) {
+    try {
+      var brut = window.localStorage.getItem(cle);
+      return brut ? JSON.parse(brut) : null;
+    } catch (e) { return null; }
+  }
+  function ecrireJSON(cle, valeur) {
+    try { window.localStorage.setItem(cle, JSON.stringify(valeur)); return true; }
+    catch (e) { return false; }
+  }
+  function stockageDisponible() {
+    try {
+      var k = "__test_quiz__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch (e) { return false; }
+  }
+  var record = {
+    cle: "quiz-record:" + ID,
+    lire: function () { var r = lireJSON(this.cle); return (r && typeof r.score === "number") ? r : null; },
+    ecrire: function (v) { return ecrireJSON(this.cle, v); }
+  };
+  // Questions à revoir : { idQuestion: { echecs, date, confiance } }, gardées d'une séance à l'autre.
+  var aRevoir = {
+    cle: "quiz-a-revoir:" + ID,
+    lire: function () { var m = lireJSON(this.cle); return (m && typeof m === "object") ? m : {}; },
+    maj: function (qid, juste, conf) {
+      var m = this.lire();
+      if (!juste || conf === "hasard") {
+        var r = m[qid] || { echecs: 0 };
+        if (!juste) r.echecs = (r.echecs || 0) + 1;
+        r.date = new Date().toLocaleDateString("fr-FR");
+        r.confiance = conf;
+        m[qid] = r;
+      } else {
+        delete m[qid];
+      }
+      ecrireJSON(this.cle, m);
+    }
+  };
+
+  /* ---------- Validation des données ---------- */
+  function texteOpt(o) { return (o && typeof o === "object") ? String(o.t || "") : String(o); }
+  function typeDe(q) { return q.type || (Array.isArray(q.options) ? "qcm" : ""); }
+
+  var QUESTIONS = (QUIZ.questions || []).filter(function (q, i) {
+    var t = q && typeDe(q), ok = !!(q && q.q);
+    if (t === "qcm") ok = ok && Array.isArray(q.options) && q.options.length >= 2 && q.options.length <= LETTRES.length;
+    else if (t === "vf") ok = ok && typeof q.reponse === "boolean";
+    else if (t === "saisie") ok = ok && Array.isArray(q.accepte) && q.accepte.length > 0 && !!q.attendu;
+    else if (t === "ordre") ok = ok && Array.isArray(q.items) && q.items.length >= 3 && q.items.length <= 8;
+    else ok = false;
+    if (!ok) console.warn("Question ignorée (données incomplètes) : n° " + (i + 1));
+    return ok;
+  });
+  QUESTIONS.forEach(function (q, i) { q.type = typeDe(q); if (!q.id) q.id = "q" + (i + 1); });
+
+  // Contrôle qualité : la bonne réponse ne doit pas se deviner à sa longueur.
+  (function controleLongueurs() {
+    var qcm = QUESTIONS.filter(function (q) { return q.type === "qcm"; });
+    var n = qcm.filter(function (q) {
+      var L = q.options.map(function (o) { return texteOpt(o).length; });
+      return L[0] > Math.max.apply(null, L.slice(1));
+    }).length;
+    if (qcm.length && n / qcm.length > 0.3) {
+      console.warn("Quiz : la bonne réponse est l’option la plus longue dans " + n + " QCM sur " + qcm.length +
+        ". Au-delà de 30 %, on la devine à sa longueur : rééquilibre les options.");
+    }
+  })();
+
+  /* ---------- Éléments ---------- */
+  var el = {
+    quiz: byId("quiz"), result: byId("result"), hint: byId("hint"),
+    mode: byId("mode"), counter: byId("counter"), score: byId("score"),
+    recordMini: byId("record-mini"), progress: byId("progress"), fill: byId("fill"),
+    reprise: byId("reprise"), repriseTexte: byId("reprise-texte"), repriseBtn: byId("reprise-btn"),
+    type: byId("q-type"), question: byId("q-text"), zone: byId("zone"),
+    confiance: byId("confiance"), confianceLabel: byId("confiance-label"),
+    confBtns: Array.prototype.slice.call(document.querySelectorAll(".btn-conf")),
+    feedback: byId("feedback"), annonce: byId("annonce"), next: byId("next"), abandon: byId("abandon"),
+    resultTitle: byId("result-title"), finalScore: byId("final-score"), finalPct: byId("final-pct"),
+    finalMessage: byId("final-message"), finalCalibrage: byId("final-calibrage"), finalRecord: byId("final-record"),
+    review: byId("review"), restart: byId("restart"), noErrors: byId("no-errors"), errors: byId("errors")
+  };
+
+  /* ---------- État ---------- */
+  var etat = {
+    mode: "complet",   // "complet" ou "revoir"
+    file: [],          // indices des questions de la série en cours
+    pos: 0,
+    score: 0,
+    resultats: [],     // { qi, juste, conf, reponse }
+    options: [],       // qcm / vf : options affichées { texte, juste, pourquoi }
+    choix: -1,         // qcm / vf : option sélectionnée
+    ordre: [],         // ordre : indices (dans q.items) dans l'ordre affiché
+    repondu: false
+  };
+
+  function courante() { return QUESTIONS[etat.file[etat.pos]]; }
+
+  function formatRecord(r) { return r ? r.score + "/" + r.total : "—"; }
+  function majRecordMini() { el.recordMini.textContent = formatRecord(record.lire()); }
+
+  function indicesARevoirStockes() {
+    var m = aRevoir.lire(), res = [];
+    QUESTIONS.forEach(function (q, i) { if (m[q.id]) res.push(i); });
+    return res;
+  }
+
+  /* ---------- Déroulement ---------- */
+  function demarrer(mode, indices, focaliser) {
+    etat.mode = mode;
+    etat.file = melanger(indices.slice());
+    etat.pos = 0;
+    etat.score = 0;
+    etat.resultats = [];
+    el.result.hidden = true;
+    el.quiz.hidden = false;
+    el.hint.hidden = false;
+    el.mode.textContent = mode === "complet" ? "Quiz complet" : "Questions à revoir";
+    el.progress.setAttribute("aria-valuemax", String(etat.file.length));
+    majRecordMini();
+    majReprise();
+    afficherQuestion(focaliser);
+  }
+
+  function majReprise() {
+    var n = indicesARevoirStockes().length;
+    var montrer = etat.mode === "complet" && etat.pos === 0 && !etat.repondu && n > 0;
+    el.reprise.hidden = !montrer;
+    if (montrer) {
+      el.repriseTexte.textContent = typo("Tu as " + n + " question" + (n > 1 ? "s" : "") +
+        " à revoir d’une séance précédente (erreurs et réponses au hasard).");
+      el.repriseBtn.textContent = "Reprendre mes questions à revoir (" + n + ")";
+    }
+  }
+
+  function majProgression(faites) {
+    var n = etat.file.length;
+    el.progress.setAttribute("aria-valuenow", String(faites));
+    el.progress.setAttribute("aria-valuetext", faites + " question(s) sur " + n);
+    el.fill.style.width = (n ? (faites / n) * 100 : 0) + "%";
+    el.score.textContent = String(etat.score);
+  }
+
+  function activerConfiance(actif, texte) {
+    el.confBtns.forEach(function (b) {
+      b.disabled = !actif;
+      b.setAttribute("aria-pressed", "false");
+      b.hidden = false;
+    });
+    ecrire(el.confianceLabel, texte);
+  }
+
+  function montrerDansEcran(elem, marge) {
+    var r = elem.getBoundingClientRect(), h = window.innerHeight;
+    if (r.bottom > h - 8) {
+      window.scrollBy({ top: Math.min(r.bottom - h + (marge || 16), r.top - 12), behavior: mouvementReduit() ? "auto" : "smooth" });
+    }
+  }
+
+  function afficherQuestion(focaliser) {
+    var n = etat.file.length;
+    var q = courante();
+
+    etat.repondu = false;
+    etat.choix = -1;
+    etat.options = [];
+    etat.ordre = [];
+
+    el.counter.innerHTML = "";
+    el.counter.appendChild(document.createTextNode("Question "));
+    var b = document.createElement("strong");
+    b.textContent = String(etat.pos + 1);
+    el.counter.appendChild(b);
+    el.counter.appendChild(document.createTextNode(" / " + n));
+    majProgression(etat.pos);
+    if (etat.pos > 0) el.reprise.hidden = true;
+
+    el.type.textContent = TYPES[q.type];
+    ecrire(el.question, q.q);
+    el.zone.textContent = "";
+    el.feedback.textContent = "";
+    el.feedback.className = "feedback";
+    el.annonce.textContent = "";
+    el.next.hidden = true;
+
+    if (q.type === "qcm" || q.type === "vf") {
+      if (q.type === "qcm") {
+        etat.options = melanger(q.options.map(function (o, i) {
+          return { texte: texteOpt(o), juste: i === 0, pourquoi: (o && typeof o === "object") ? o.pourquoi : "" };
+        }));
+      } else {
+        etat.options = [
+          { texte: "Vrai", juste: q.reponse === true, lettre: "V" },
+          { texte: "Faux", juste: q.reponse === false, lettre: "F" }
+        ];
+      }
+      var groupe = document.createElement("div");
+      groupe.className = "options";
+      groupe.id = "options";
+      groupe.setAttribute("role", "group");
+      groupe.setAttribute("aria-labelledby", "q-text");
+      etat.options.forEach(function (opt, i) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "opt";
+        btn.setAttribute("aria-pressed", "false");
+        var lettre = creer("span", "letter", opt.lettre || LETTRES[i]);
+        lettre.setAttribute("aria-hidden", "true");
+        var corps = creer("span", "opt-body");
+        corps.appendChild(creer("span", "opt-text", opt.texte));
+        btn.setAttribute("aria-label", (opt.lettre ? "" : LETTRES[i] + ". ") + sansEtoiles(opt.texte));
+        btn.appendChild(lettre);
+        btn.appendChild(corps);
+        btn.addEventListener("click", function (ev) {
+          if (etat.repondu) {
+            // Au clavier (Entrée ou Espace), on passe à la suite ; à la souris, on ne fait que montrer le bouton.
+            if (ev.detail === 0) suivante(); else el.next.focus({ preventScroll: true });
+            return;
+          }
+          choisir(i);
+        });
+        groupe.appendChild(btn);
+      });
+      el.zone.appendChild(groupe);
+      activerConfiance(false, "Choisis une réponse, puis valide en disant si tu es :");
+    } else if (q.type === "saisie") {
+      var label = creer("label", "sr-only", "Ta réponse");
+      label.setAttribute("for", "saisie");
+      var input = document.createElement("input");
+      input.type = "text";
+      input.id = "saisie";
+      input.className = "saisie";
+      input.setAttribute("autocomplete", "off");
+      input.setAttribute("autocapitalize", "off");
+      input.setAttribute("autocorrect", "off");
+      input.setAttribute("spellcheck", "false");
+      input.setAttribute("enterkeyhint", "done");
+      input.placeholder = "Tape ta réponse";
+      input.addEventListener("input", function () {
+        var plein = input.value.trim() !== "";
+        el.confBtns.forEach(function (b) { b.disabled = !plein; });
+      });
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          if (input.value.trim() !== "") { el.confBtns[0].focus(); montrerDansEcran(el.confiance); }
+        }
+      });
+      el.zone.appendChild(label);
+      el.zone.appendChild(input);
+      el.zone.appendChild(creer("p", "aide", "Accents et majuscules ne comptent pas. Entrée, puis choisis ton degré de confiance."));
+      activerConfiance(false, "Tape ta réponse, puis valide en disant si tu es :");
+    } else if (q.type === "ordre") {
+      var ids = q.items.map(function (_, i) { return i; });
+      do { melanger(ids); } while (ids.every(function (v, i) { return v === i; }));
+      etat.ordre = ids;
+      var ol = document.createElement("ol");
+      ol.className = "ordre";
+      ol.id = "ordre";
+      ol.setAttribute("aria-labelledby", "q-text");
+      el.zone.appendChild(ol);
+      dessinerOrdre();
+      activerConfiance(true, "Quand l’ordre te convient, valide en disant si tu es :");
+    }
+
+    if (focaliser) {
+      el.question.focus({ preventScroll: true });
+      var haut = el.quiz.getBoundingClientRect().top;
+      if (haut < 0 || haut > window.innerHeight * 0.6) {
+        el.quiz.scrollIntoView({ block: "start", behavior: mouvementReduit() ? "auto" : "smooth" });
+      }
+    }
+  }
+
+  function dessinerOrdre(focusInfo) {
+    var q = courante();
+    var ol = byId("ordre");
+    ol.textContent = "";
+    etat.ordre.forEach(function (idItem, pos) {
+      var li = document.createElement("li");
+      li.appendChild(creer("span", "rang", String(pos + 1)));
+      li.appendChild(creer("span", "ordre-texte", q.items[idItem]));
+      var fl = creer("span", "fleches");
+      [["haut", "↑", "Monter"], ["bas", "↓", "Descendre"]].forEach(function (d) {
+        var bt = document.createElement("button");
+        bt.type = "button";
+        bt.className = "fleche";
+        bt.textContent = d[1];
+        bt.setAttribute("aria-label", d[2] + " : " + sansEtoiles(q.items[idItem]));
+        bt.setAttribute("data-dir", d[0]);
+        bt.disabled = etat.repondu || (d[0] === "haut" ? pos === 0 : pos === etat.ordre.length - 1);
+        bt.addEventListener("click", function () { deplacer(pos, d[0] === "haut" ? -1 : 1); });
+        fl.appendChild(bt);
+      });
+      li.appendChild(fl);
+      ol.appendChild(li);
+    });
+    if (focusInfo) {
+      var li2 = ol.children[focusInfo.pos];
+      var cible = li2 && li2.querySelector('[data-dir="' + focusInfo.dir + '"]');
+      if (cible && cible.disabled) cible = li2.querySelector(".fleche:not(:disabled)");
+      if (cible) cible.focus();
+    }
+  }
+
+  function deplacer(pos, sens) {
+    if (etat.repondu) return;
+    var cible = pos + sens;
+    if (cible < 0 || cible >= etat.ordre.length) return;
+    var t = etat.ordre[pos]; etat.ordre[pos] = etat.ordre[cible]; etat.ordre[cible] = t;
+    dessinerOrdre({ pos: cible, dir: sens < 0 ? "haut" : "bas" });
+    el.annonce.textContent = typo("« " + sansEtoiles(courante().items[t]) + " » est maintenant en position " + (cible + 1) + ".");
+  }
+
+  function choisir(i) {
+    if (etat.repondu) return;
+    etat.choix = i;
+    var boutons = el.zone.querySelectorAll(".opt");
+    Array.prototype.forEach.call(boutons, function (btn, k) {
+      btn.setAttribute("aria-pressed", k === i ? "true" : "false");
+    });
+    var opt = etat.options[i];
+    el.confBtns.forEach(function (b) { b.disabled = false; });
+    ecrire(el.confianceLabel, "Réponse " + (opt.lettre ? "« " + opt.texte + " »" : LETTRES[i]) + " choisie. Valide en disant si tu es :");
+    montrerDansEcran(el.confiance);
+  }
+
+  function peutValider() {
+    var q = courante();
+    if (etat.repondu) return false;
+    if (q.type === "qcm" || q.type === "vf") return etat.choix >= 0;
+    if (q.type === "saisie") { var inp = byId("saisie"); return !!(inp && inp.value.trim()); }
+    return true;
+  }
+
+  function valider(conf) {
+    if (!peutValider()) return;
+    etat.repondu = true;
+    var qi = etat.file[etat.pos];
+    var q = QUESTIONS[qi];
+    var juste = false, reponse = "", verdict = "", extra = null, pourquoi = "";
+
+    if (q.type === "qcm" || q.type === "vf") {
+      var choix = etat.choix, lettreBonne = "", texteBonne = "";
+      juste = etat.options[choix].juste;
+      reponse = etat.options[choix].texte;
+      pourquoi = juste ? "" : (etat.options[choix].pourquoi || "");
+      var boutons = el.zone.querySelectorAll(".opt");
+      Array.prototype.forEach.call(boutons, function (btn, i) {
+        var opt = etat.options[i];
+        btn.setAttribute("aria-disabled", "true");
+        btn.removeAttribute("aria-pressed");
+        var statut = null;
+        if (opt.juste) {
+          lettreBonne = opt.lettre || LETTRES[i];
+          texteBonne = opt.texte;
+          btn.classList.add("is-correct");
+          statut = (i === choix) ? "✓ Ta réponse : juste" : "✓ Bonne réponse";
+        } else if (i === choix) {
+          btn.classList.add("is-wrong");
+          statut = "✗ Ta réponse";
+        } else {
+          btn.classList.add("is-dim");
+        }
+        if (statut) {
+          btn.querySelector(".opt-body").appendChild(creer("span", "status", statut));
+          btn.setAttribute("aria-label", btn.getAttribute("aria-label") + " (" + statut.replace(/^[✓✗]\s*/, "") + ")");
+        }
+      });
+      if (!juste) {
+        verdict = q.type === "vf"
+          ? "Erreur : l’affirmation est " + (q.reponse ? "vraie." : "fausse.")
+          : "Erreur. Bonne réponse (" + lettreBonne + ") : " + texteBonne;
+      }
+    } else if (q.type === "saisie") {
+      var inp = byId("saisie");
+      reponse = inp.value.trim();
+      juste = q.accepte.every(function (groupe) {
+        return groupe.some(function (v) { return contientVariante(reponse, v); });
+      });
+      inp.readOnly = true;
+      inp.classList.add(juste ? "is-correct" : "is-wrong");
+      verdict = juste ? "Juste ! Réponse attendue : " + q.attendu : "Erreur. Réponse attendue : " + q.attendu;
+    } else if (q.type === "ordre") {
+      var bien = 0;
+      etat.ordre.forEach(function (v, i) { if (v === i) bien++; });
+      juste = bien === q.items.length;
+      reponse = etat.ordre.map(function (v) { return q.items[v]; }).join(" → ");
+      dessinerOrdre();
+      var lis = byId("ordre").children;
+      etat.ordre.forEach(function (v, i) {
+        lis[i].classList.add(v === i ? "is-correct" : "is-wrong");
+        var m = creer("span", "marque", v === i ? "✓" : "✗");
+        m.setAttribute("aria-label", v === i ? "bien placé" : "mal placé");
+        lis[i].replaceChild(m, lis[i].lastChild);
+      });
+      if (!juste) {
+        verdict = "Erreur : " + bien + " étape" + (bien > 1 ? "s" : "") + " sur " + q.items.length + " à la bonne place. Le bon ordre :";
+        extra = document.createElement("ol");
+        q.items.forEach(function (it) { extra.appendChild(creer("li", "", it)); });
+      }
+    }
+
+    if (juste) etat.score++;
+    etat.resultats.push({ qi: qi, juste: juste, conf: conf, reponse: reponse });
+    aRevoir.maj(q.id, juste, conf);
+
+    el.confBtns.forEach(function (b) {
+      b.disabled = true;
+      b.setAttribute("aria-pressed", b.getAttribute("data-conf") === conf ? "true" : "false");
+    });
+    ecrire(el.confianceLabel, "Tu as validé en te disant " + CONFIANCES[conf] + ".");
+
+    el.feedback.className = "feedback " + (juste ? "ok" : "ko");
+    el.feedback.textContent = "";
+    el.feedback.appendChild(creer("p", "verdict", verdict || "Juste !"));
+    if (extra) el.feedback.appendChild(extra);
+    if (!juste && conf === "sur") {
+      el.feedback.appendChild(creer("p", "alerte", "Erreur commise en étant sûr : elle passe en tête de tes questions à revoir."));
+    } else if (juste && conf === "hasard") {
+      el.feedback.appendChild(creer("p", "alerte", "Juste, mais au hasard : la question reste dans tes questions à revoir."));
+    }
+    if (pourquoi) {
+      var pp = creer("p", "pourquoi");
+      pp.appendChild(creer("b", "", "Pourquoi ta réponse ne va pas : "));
+      var sp = document.createElement("span"); ecrire(sp, pourquoi); pp.appendChild(sp);
+      el.feedback.appendChild(pp);
+    }
+    el.feedback.appendChild(creer("p", "", q.explication));
+    if (q.dissertation) {
+      var pd = creer("p", "dissert");
+      pd.appendChild(creer("b", "", "En dissertation : "));
+      var sd = document.createElement("span"); ecrire(sd, q.dissertation); pd.appendChild(sd);
+      el.feedback.appendChild(pd);
+    }
+    var ref = creer("p", "ref");
+    ref.appendChild(creer("b", "", "Réf. : "));
+    var sr = document.createElement("span"); ecrire(sr, q.ref || ""); ref.appendChild(sr);
+    el.feedback.appendChild(ref);
+
+    majProgression(etat.pos + 1);
+    el.reprise.hidden = true;
+
+    var derniere = etat.pos + 1 >= etat.file.length;
+    el.next.textContent = derniere ? "Voir mon résultat" : "Question suivante";
+    el.next.hidden = false;
+    el.next.focus({ preventScroll: true });
+    montrerRetour();
+  }
+
+  // Après la réponse : révéler le bouton « suivante » sans faire sortir le retour (verdict) de l'écran.
+  function montrerRetour() {
+    var r = el.feedback.getBoundingClientRect();
+    var nb = el.next.getBoundingClientRect();
+    var h = window.innerHeight;
+    var delta = 0;
+    if (r.top < 0) delta = r.top - 12;
+    else if (nb.bottom > h - 8) delta = Math.min(nb.bottom - h + 16, r.top - 12);
+    if (delta) window.scrollBy({ top: delta, behavior: mouvementReduit() ? "auto" : "smooth" });
+  }
+
+  function suivante() {
+    if (!etat.repondu) return;
+    etat.pos++;
+    if (etat.pos >= etat.file.length) { afficherResultat(); }
+    else { afficherQuestion(true); }
+  }
+
+  function message(ratio) {
+    if (ratio >= 0.9) return "Excellent : tu maîtrises l’argument de l’essai. Prochaine étape : retenir, pour chaque chapitre, un exemple précis et sa piste de dissertation.";
+    if (ratio >= 0.7) return "Solide. Revois tout de suite tes questions à revoir, puis refais le quiz complet dans deux ou trois jours.";
+    if (ratio >= 0.5) return "Des bases, mais des trous : relis les explications, puis les chapitres concernés dans ton édition.";
+    return "Reprends l’essai chapitre par chapitre (une fiche par chapitre), puis retente le quiz : l’ordre aura changé.";
+  }
+
+  function calibrage(res) {
+    var parties = [];
+    ["sur", "hesitant", "hasard"].forEach(function (c) {
+      var lot = res.filter(function (r) { return r.conf === c; });
+      if (!lot.length) return;
+      var j = lot.filter(function (r) { return r.juste; }).length;
+      parties.push((c === "sur" ? "Sûr" : c === "hesitant" ? "Hésitant" : "Au hasard") + " : " + j + " juste" + (j > 1 ? "s" : "") + " sur " + lot.length);
+    });
+    return parties.length ? "Ta confiance face aux résultats. " + parties.join(" · ") + "." : "";
+  }
+
+  function detailQuestion(r, prio) {
+    var q = QUESTIONS[r.qi];
+    var d = document.createElement("details");
+    if (prio) d.className = "prio";
+    d.appendChild(creer("summary", "", q.q));
+    var box = document.createElement("div");
+    var p0 = creer("p", "");
+    p0.appendChild(creer("span", r.juste ? "good" : "mine", "Ta réponse (" + CONFIANCES[r.conf] + ") : "));
+    var s0 = document.createElement("span"); ecrire(s0, r.reponse); p0.appendChild(s0);
+    box.appendChild(p0);
+    var p1 = creer("p", "");
+    p1.appendChild(creer("span", "good", "Bonne réponse : "));
+    var s1 = document.createElement("span");
+    if (q.type === "qcm") ecrire(s1, texteOpt(q.options[0]));
+    else if (q.type === "vf") ecrire(s1, q.reponse ? "Vrai" : "Faux");
+    else if (q.type === "saisie") ecrire(s1, q.attendu);
+    else ecrire(s1, q.items.join(" → "));
+    p1.appendChild(s1);
+    box.appendChild(p1);
+    box.appendChild(creer("p", "", q.explication));
+    if (q.dissertation) box.appendChild(creer("p", "dissert", "En dissertation : " + q.dissertation));
+    box.appendChild(creer("p", "", "Réf. : " + (q.ref || "")));
+    d.appendChild(box);
+    return d;
+  }
+
+  function afficherResultat() {
+    var n = etat.file.length;
+    var ratio = n ? etat.score / n : 0;
+    var res = etat.resultats;
+    var fautesSures = res.filter(function (r) { return !r.juste && r.conf === "sur"; });
+    var autresFautes = res.filter(function (r) { return !r.juste && r.conf !== "sur"; });
+    var hasards = res.filter(function (r) { return r.juste && r.conf === "hasard"; });
+    var aRevoirSerie = fautesSures.concat(autresFautes, hasards);
+
+    el.quiz.hidden = true;
+    el.hint.hidden = true;
+    el.result.hidden = false;
+
+    el.resultTitle.textContent = etat.mode === "complet" ? "Ton résultat" : "Questions à revoir : résultat";
+    el.finalScore.textContent = "";
+    el.finalScore.appendChild(document.createTextNode(etat.score + " "));
+    var petit = document.createElement("small");
+    petit.textContent = "/ " + n;
+    el.finalScore.appendChild(petit);
+    el.finalPct.textContent = Math.round(ratio * 100) + " % de bonnes réponses";
+    ecrire(el.finalMessage, etat.mode === "complet" ? message(ratio)
+      : (aRevoirSerie.length === 0
+          ? "Toutes ces questions sont maîtrisées. Refais le quiz complet dans quelques jours pour vérifier que c’est acquis."
+          : "Encore " + aRevoirSerie.length + " question(s) à reprendre : relance la révision jusqu’à zéro faute."));
+    ecrire(el.finalCalibrage, calibrage(res));
+
+    // Record : seulement pour le quiz complet.
+    el.finalRecord.className = "record";
+    if (etat.mode === "complet") {
+      var ancien = record.lire();
+      if (!stockageDisponible()) {
+        ecrire(el.finalRecord, "Record et questions à revoir non mémorisés : le stockage local est indisponible dans ce navigateur (navigation privée ?).");
+      } else if (!ancien || etat.score > ancien.score) {
+        record.ecrire({ score: etat.score, total: n, date: new Date().toLocaleDateString("fr-FR") });
+        el.finalRecord.className = "record new";
+        ecrire(el.finalRecord, ancien ? "Nouveau record ! (ancien : " + formatRecord(ancien) + ")" : "Premier record enregistré : " + etat.score + "/" + n + ".");
+      } else {
+        ecrire(el.finalRecord, "Ton record : " + formatRecord(ancien) + (ancien.date ? " (le " + ancien.date + ")" : "") + ".");
+      }
+    } else {
+      ecrire(el.finalRecord, "Le record ne compte que le quiz complet. Record actuel : " + formatRecord(record.lire()) + ".");
+    }
+    majRecordMini();
+
+    // Boutons et listes.
+    var k = aRevoirSerie.length;
+    etat.serieARevoir = aRevoirSerie.map(function (r) { return r.qi; });
+    el.review.hidden = k === 0;
+    el.review.textContent = "Revoir ces questions (" + k + ")";
+    el.noErrors.hidden = k !== 0;
+    el.errors.hidden = k === 0;
+    el.errors.textContent = "";
+    [
+      [fautesSures, "Erreurs commises en étant sûr : à revoir en priorité", true],
+      [autresFautes, "Autres erreurs", false],
+      [hasards, "Justes, mais au hasard : à consolider", false]
+    ].forEach(function (bloc) {
+      if (!bloc[0].length) return;
+      el.errors.appendChild(creer("h3", "", bloc[1] + " (" + bloc[0].length + ")"));
+      bloc[0].forEach(function (r) { el.errors.appendChild(detailQuestion(r, bloc[2])); });
+    });
+
+    el.resultTitle.focus({ preventScroll: true });
+    el.result.scrollIntoView({ block: "start", behavior: mouvementReduit() ? "auto" : "smooth" });
+  }
+
+  function tousLesIndices() {
+    return QUESTIONS.map(function (_, i) { return i; });
+  }
+
+  /* ---------- Événements ---------- */
+  el.next.addEventListener("click", suivante);
+  el.confBtns.forEach(function (b) {
+    b.addEventListener("click", function () { valider(b.getAttribute("data-conf")); });
+  });
+  el.review.addEventListener("click", function () {
+    if (etat.serieARevoir && etat.serieARevoir.length) demarrer("revoir", etat.serieARevoir, true);
+  });
+  el.restart.addEventListener("click", function () { demarrer("complet", tousLesIndices(), true); });
+  el.abandon.addEventListener("click", function () { demarrer("complet", tousLesIndices(), true); });
+  el.repriseBtn.addEventListener("click", function () {
+    var ind = indicesARevoirStockes();
+    if (ind.length) demarrer("revoir", ind, true);
+  });
+
+  // Touches : e.code pour les chiffres (claviers AZERTY et QWERTY), e.key pour les lettres.
+  function indexTouche(e, vf) {
+    var i = ["Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6"].indexOf(e.code);
+    if (i < 0) i = ["Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6"].indexOf(e.code);
+    if (i < 0) i = ["1", "2", "3", "4", "5", "6"].indexOf(e.key);
+    if (i < 0 && e.key && e.key.length === 1) {
+      var k = e.key.toLowerCase();
+      if (vf) i = "vf".indexOf(k);
+      if (i < 0) i = "abcdef".indexOf(k);
+    }
+    return i;
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.altKey || e.ctrlKey || e.metaKey || el.quiz.hidden) return;
+    var cible = e.target || document.body;
+    var tag = cible.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    if (etat.repondu) {
+      var surBouton = tag === "BUTTON" && !(cible.classList && cible.classList.contains("opt"));
+      if (e.key === "Enter" && !surBouton) { e.preventDefault(); suivante(); }
+      return;
+    }
+    var q = courante();
+    var conf = { s: "sur", h: "hesitant", z: "hasard" }[(e.key || "").toLowerCase()];
+    if (conf) {
+      if (peutValider()) { e.preventDefault(); valider(conf); }
+      return;
+    }
+    if (q.type === "qcm" || q.type === "vf") {
+      var i = indexTouche(e, q.type === "vf");
+      if (i >= 0 && i < etat.options.length) {
+        e.preventDefault();
+        choisir(i);
+      }
+    }
+  });
+
+  /* ---------- Lancement ---------- */
+  if (QUESTIONS.length) {
+    demarrer("complet", tousLesIndices(), false);
+  } else {
+    el.quiz.hidden = false;
+    el.question.textContent = "Aucune question valide dans ce quiz.";
+  }
+})();
+</script>
+</body>
+</html>
