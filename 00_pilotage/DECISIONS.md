@@ -23,3 +23,4 @@
 | 24/09/2026 | Localiser les passages par références stables (Stephanus, chapitres) plutôt que par citations littérales non vérifiées | Claude | Pas d'accès aux traductions au programme ; une citation fausse coûte cher en copie |
 | 24/09/2026 | Produire 6 **échantillons** de formats avant de lancer la production en série | Claude | Te laisser choisir les formats qui te conviennent avant d'investir |
 | 24/09/2026 | Exports commités dans `exports/` (PDF, `.apkg`) | Claude | Téléchargeables directement depuis GitHub sur téléphone |
+| 24/09/2026 | **Travail directement sur `main`** (plus de branche intermédiaire ni de PR) | **Toi** | « Tu peux travailler directement sur le main. Je te fais confiance. » (la PR #1 a été fusionnée avant) |

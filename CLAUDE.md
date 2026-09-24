@@ -12,6 +12,7 @@ Ce dépôt appartient à un étudiant de PT* qui prépare l'épreuve de françai
 - Ajouter une entrée **en haut** de `00_pilotage/JOURNAL.md` (modèle dans le fichier) : demande, ce qui a été fait, fichiers créés ou modifiés, décisions, points à vérifier, suite prévue.
 - Cocher les cases concernées dans `FEUILLE_DE_ROUTE.md` ; reporter toute nouvelle décision dans `DECISIONS.md`.
 - Régénérer les exports concernés (voir « Outils »), puis faire un commit au message explicite, en français, et un push.
+- **Branche : on travaille directement sur `main`** (autorisation de l'étudiant du 24/09/2026, voir `DECISIONS.md`). Faire `git pull` avant de commencer, car l'étudiant peut aussi modifier des fichiers depuis GitHub.
 
 ## Langue et ton
 - Tout en **français**, tutoiement, niveau prépa : clair, dense, sans remplissage.
