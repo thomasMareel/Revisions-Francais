@@ -1,0 +1,5 @@
+# Dépendances des outils (réinstallables : cd outils && npm install ; pip install -r outils/requirements.txt)
+outils/node_modules/
+__pycache__/
+*.pyc
+.DS_Store
