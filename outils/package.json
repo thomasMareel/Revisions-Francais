@@ -1,0 +1,13 @@
+{
+  "name": "revisions-francais-outils",
+  "private": true,
+  "type": "module",
+  "description": "Outils d'export (Markdown -> PDF) du dépôt de révisions de français",
+  "scripts": {
+    "pdf": "node exporter_pdf.mjs"
+  },
+  "dependencies": {
+    "marked": "^18.0.0",
+    "mermaid": "^12.0.0"
+  }
+}
