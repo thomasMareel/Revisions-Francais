@@ -7,7 +7,52 @@
 > - **Comment l'utiliser** : toi, tu regardes surtout la semaine type (§ c) et les jalons (§ d) ; les cases à cocher (§ a) sont tenues par Claude à chaque fin de session.
 >   Les identifiants (A1, C7, G6…) renvoient au catalogue de [PROPOSITIONS.md](PROPOSITIONS.md) ; le programme et l'épreuve sont dans [PROGRAMME.md](PROGRAMME.md).
 
-## Où on en est (24/09/2026)
+## 0. Ton plan (mis à jour le 26/09/2026, d'après tes réponses)
+
+> Ce paragraphe **prime sur le reste du document** : les budgets de 3 h par semaine des § b et c restent valables seulement pour les semaines où tu as plus de temps (vacances, avant un DS).
+
+**Ton profil** : environ 9/20, « 15 min par semaine au moins, et plus pour les entraînements », Android + AnkiDroid + imprimante, objectif **Arts et Métiers** (épreuve qui compte : le **Français B**, coefficient 5 à l'admission d'après un extrait du Livret PT 2026, à confirmer).
+
+### Le socle : Anki, 2 min par jour (≈ 15 min par semaine)
+
+- **Claude rédige et met à jour les cartes** ; toi, tu importes un seul fichier, `exports/anki/francais-PT.apkg`, et tu révises. Mode d'emploi : [`exports/anki/README.md`](../exports/anki/README.md).
+- **Réglage : 2 nouvelles cartes par jour.** Le premier paquet (thème 1 + méthode) s'installe ainsi en 2 mois environ ; le thème 2 arrive ensuite, au fil du cours.
+- **Ce que ça permet** : garder en mémoire les exemples précis, les notions et les règles de méthode, c'est-à-dire la matière de la dissertation. **Ce que ça ne permet pas** : apprendre à résumer et à disserter. Ça ne vient qu'en écrivant, d'où les entraînements.
+
+### Les entraînements, en plus, par ordre de rentabilité pour toi
+
+| Priorité | Entraînement | Durée | Fréquence visée | Ce que fait Claude |
+|---|---|---|---|---|
+| 1 | **Résumé** : 8 points, et c'est la technique qui rapporte le plus vite | 30 min (exercice court), puis 1 h 30 (complet) | 1 par mois ; le premier : l'exercice de P3 § 7, d'ici mi-octobre | donne le texte, corrige ta photo, recompte tes mots |
+| 2 | **Plan express** : problématique + 3 parties + exemples | 20 min | toutes les 2 semaines | donne le sujet, corrige ton plan, puis montre un plan commenté |
+| 3 | **DS de français** | — | à chaque DS | kit d'une page à J-3 ; analyse de ta copie corrigée après |
+
+**Plancher proposé** : un entraînement toutes les 2 semaines (20 à 30 min). En dessous, les cartes entretiennent ta mémoire, mais ta note ne bougera pas.
+
+### Pour passer de 9 à 12, dans cet ordre
+
+1. **Résumé, les points « faciles »** : un décompte exact (fourchette de ± 10 %, jamais de chiffre faux), l'énonciation de l'auteur (jamais « l'auteur dit »), l'ordre du texte respecté.
+2. **Dissertation** : une vraie problématique (une tension, pas une question plate) et des exemples précis *analysés* : les cartes te fournissent les exemples.
+3. **Langue** : à partir de ta première copie corrigée, trois règles par mois tirées de tes propres fautes.
+
+### Ta semaine type (régime 15 min)
+
+| Quand | Quoi | Durée |
+|---|---|---|
+| Chaque jour (transports, file d'attente) | Anki | 2 min |
+| Une semaine sur deux | plan express, sur papier, photo dans le chat | 20 min |
+| Une fois par mois | un résumé (d'abord court, puis complet) | 30 min à 1 h 30 |
+| Le dimanche, si tu veux | « ma semaine » dans le chat : Claude te dit quoi faire | 1 min |
+
+**Mis de côté tant que tu es à 15 min par semaine** : fiches miroir (A1), matrice (D1), relectures ciblées (D2), analyses d'intitulés (D4). On les reprend pendant les vacances ou si tu dégages du temps. Le principe « tu écris, Claude corrige » passe donc, pour l'instant, par les entraînements.
+
+### Cette semaine (≈ 10 min, plus 30 min si possible)
+
+1. **Rendre le dépôt privé** (2 min) : il est encore public (vérifié le 26/09). Voir l'étape 0 de [PROPOSITIONS.md](PROPOSITIONS.md).
+2. **Installer AnkiDroid, importer `francais-PT.apkg`, régler 2 nouvelles cartes par jour** (5 min) : [mode d'emploi](../exports/anki/README.md).
+3. *En plus, si possible* : l'exercice de résumé de [P3 § 7](../echantillons/03_methode_resume-Banque-PT.md) (30 min, sur papier, décompte à la main), puis la photo dans le chat.
+
+## Où on en était (24/09/2026)
 
 - **Fait** : le cadre (programme, décisions, conventions, outils), six échantillons, les propositions révisées et cette feuille de route (vague 0).
 - **Prochaine étape pour toi** : rendre le dépôt privé (étape 0), répondre aux 4 questions, faire l'exercice de résumé de P3 § 7, puis le diagnostic du thème 1 (B1). Voir « Cette semaine » dans [PROPOSITIONS.md](PROPOSITIONS.md#cette-semaine).
@@ -29,6 +74,17 @@
 - [x] **Clôture de la session du 24/09** (G8) : créer `00_pilotage/JOURNAL.md` avec l'entrée de la session ; reporter dans `DECISIONS.md` la question Q0, la scission de Q1 (Q1 ordre du cours, Q14 périmètre de l'épreuve) et les questions Q9 à Q15 ; commiter et pousser `PROPOSITIONS.md`, `FEUILLE_DE_ROUTE.md` et `echantillons/`, encore non suivis par Git
 
 ### Vague 1 : démarrage et stock court (25/09 → 16/10/2026)
+
+**Recentrage du 26/09 (régime 15 min, voir § 0)** : en priorité, dans cet ordre ; le reste de la vague 1 passe « si le temps le permet ».
+
+- [ ] Paquet Anki principal `exports/anki/francais-PT.apkg` : thème 1 (Verne, Canguilhem, Haushofer, croisements) + méthode, rédigé par Claude et doublement vérifié (B2)
+- [x] Mode d'emploi AnkiDroid : import, réglages, mises à jour, cartes retirées (`exports/anki/README.md`)
+- [x] Texte intégral de Verne (domaine public) dans `ressources/textes/`, pour vérifier les chapitres
+- [ ] `methode/grille_correction.md` (codes RES, DIS, LAN), prête avant ta première photo de résumé (E1)
+- [ ] Trois sujets de plans express sur le thème 1, en forme de phrase à discuter (C7)
+- [ ] Kit DS d'une page, dès que tu connais la date de ton premier DS de français (E3)
+- [ ] Méthode du résumé en une page, à imprimer (C1)
+
 
 **Cadre et outils (coulisses)**
 

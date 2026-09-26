@@ -4,6 +4,11 @@ Ce dépôt appartient à un étudiant de PT* qui prépare l'épreuve de françai
 
 **Principe directeur** (voir `00_pilotage/PROPOSITIONS.md`) : *l'étudiant écrit, Claude interroge, corrige et garde les traces.* Les fiches d'œuvre, la matrice et les squelettes sont rédigés par l'étudiant puis contrôlés ; Claude produit surtout des supports d'exercice (sujets, textes à résumer, quiz, cartes, grilles, corrections).
 
+## Profil de l'étudiant (26/09/2026, détail dans `DECISIONS.md`)
+- Niveau en français : environ 9/20 (« moyen, voire mauvais ») ; objectif : **Arts et Métiers**, donc le **Français B** d'abord.
+- Temps : **15 min par semaine au moins** (Anki ≈ 2 min par jour), plus des entraînements ponctuels. Ne pas lui imposer de lecture de fiches : privilégier les cartes et les exercices courts (plan express de 20 min, résumé mensuel), voir `FEUILLE_DE_ROUTE.md` § 0.
+- Android + AnkiDroid + imprimante. **C'est Claude qui rédige et maintient les cartes Anki** (demande de l'étudiant).
+
 ## En début de session : lire dans cet ordre
 1. `00_pilotage/PROGRAMME.md` : thèmes, œuvres, traductions, format de l'épreuve. C'est la **source de vérité** : ne jamais le contredire sans le corriger (avec une entrée au journal).
 2. `00_pilotage/DECISIONS.md` : choix déjà faits par l'étudiant et questions encore ouvertes.
@@ -63,7 +68,10 @@ exports/          PDF et paquets Anki générés (à commiter : l'étudiant les 
 ```
 
 ## Outils
-- Paquets Anki : `pip install -r outils/requirements.txt` puis `python3 outils/construire_anki.py` → `exports/anki/*.apkg`. Avec la colonne `#guid`, les réimportations mettent les cartes à jour sans doublon **tant que l'identifiant ne change pas**.
+- Paquet Anki : `pip install -r outils/requirements.txt`, puis `python3 outils/verifier_cartes.py` (format, identifiants uniques dans tout le dépôt, jumeau .md synchronisé), puis `python3 outils/construire_anki.py`. Sortie : **un seul fichier à importer**, `exports/anki/francais-PT.apkg` (tous les `.tsv` hors `echantillons/`, cartes alternées entre fichiers selon leur ordre d'apprentissage) ; les échantillons vont dans `exports/anki/echantillons/`. Après chaque mise à jour du paquet : prévenir l'étudiant (réimporter le fichier) et le noter au journal.
+- Comportement d'Anki à la réimport (vérifié dans le code source d'Anki, `rslib/src/import_export/package/apkg/import/`) : une note de même identifiant est **mise à jour** (champs et tags) si le fichier est plus récent, l'historique est conservé ; les nouvelles notes s'ajoutent ; mais une carte déjà importée **ne change ni de paquet ni d'état** (suspension). Donc : ne jamais changer un identifiant ; ne jamais modifier les champs ni les modèles du type de note (sinon conflit) ; pour retirer une carte, **garder sa ligne et lui ajouter le tag `retiree`**, puis dire à l'étudiant de chercher `tag:retiree` dans AnkiDroid et de supprimer.
+- Où ranger les cartes : `theme1_nature/<œuvre>/10_cartes_*.tsv`, `theme2_creation/<œuvre>/10_cartes_*.tsv`, `methode/10_cartes_*.tsv`, chacune avec son jumeau `.md`. Préfixes d'identifiants en usage : `met-`, `ver-`, `can-`, `hau-`, `nat-` (thème 1, croisements) ; `pla-` (Platon, échantillon P2, à déplacer dans `theme2_creation/platon/` quand le cours commence Platon, en gardant ses identifiants).
+- Textes intégraux du domaine public : `ressources/textes/` (Verne déposé le 26/09) ; vérifier les chapitres par `grep` avant toute référence.
 - Compteur de mots : `python3 outils/compter_mots.py resume.txt --cible 200 --declare 198 --source texte.txt` (fourchette de ± 10 %, écart avec le décompte déclaré, tournures de commentaire extérieur, suites de 6 mots recopiées ; options `--trait-union-separe`, `--aujourdhui-un-mot`, `--reperes 25`).
 - PDF : `cd outils && npm install` (une fois par session) puis, depuis la racine, `node outils/exporter_pdf.mjs [fichiers.md]` → `exports/pdf/...`. Les blocs `<details>` sont dépliés et les diagrammes Mermaid sont rendus.
 - Réseau : dans ces sessions cloud, la recherche web fonctionne mais la lecture directe de la plupart des sites (BO, banquept.fr…) est bloquée. Tout fait non vérifiable reste marqué « à vérifier ».

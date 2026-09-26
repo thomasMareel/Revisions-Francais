@@ -54,6 +54,8 @@ L'arrêté du 22 avril 2026 (BO n° 21 de 2026, référence ESRS2611873A) fixe *
 
 **Français A (Banque PT)** : il existe aussi une épreuve écrite de **Français A**, une **dissertation seule de 4 h** sur le programme, sans résumé ; des rapports de jury « Français A » sont publiés sur banquept.fr (2018 notamment). Selon des sources secondaires, seules certaines écoles l'utilisent : vérifie dans le Livret PT 2027 et le document « Coefficients » si **tes** écoles te la font passer (question Q3 de `DECISIONS.md`). Confiance : moyenne.
 
+**Arts et Métiers (objectif principal de l'étudiant)** : d'après un extrait du Livret PT 2026 obtenu par recherche, le concours commun Arts et Métiers fait compter le **Français B pour l'admission avec un coefficient 5**. Les autres coefficients cités dans le même extrait : Maths II 4, TP physique 4, physique-chimie 6, langue vivante obligatoire 5, TP S2I 4, S2I II 4, TIPE 5. Le rôle éventuel du Français A pour les Arts et Métiers n'est pas établi. Confiance : moyenne. **À vérifier dans le Livret PT 2027** (document « Coefficients »).
+
 **Autres concours** : si tu vises aussi l'X (filière PT) ou d'autres écoles hors Banque PT, vérifie s'il y a un **oral de français** (l'X publie ses rapports d'oral sur polytechnique.edu).
 
 ## 4. Sources consultées (24/09/2026)
@@ -89,3 +91,4 @@ Programme :
 |------|--------------|---------|
 | 24/09/2026 | Création : thèmes, œuvres, épreuve Français B, sources | recherche web de la session |
 | 24/09/2026 | Ajouts : éditions prescrites (Platon GF, Woolf Folio classique n° 6764, éditions de Zola) ; thème du texte ; ordres de grandeur ; barème des pénalités ; repères ; règle de décompte ; Français A ; nouvelles sources | vérifications des agents du workflow (échantillons P3 et P4, critique « complétude »), recoupées par recherche web |
+| 26/09/2026 | Coefficient du Français B aux Arts et Métiers (5 à l'admission, extrait du Livret PT 2026, à confirmer) | recherche web de la session, après la réponse de l'étudiant (objectif : Arts et Métiers) |

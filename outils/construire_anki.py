@@ -1,34 +1,40 @@
 #!/usr/bin/env python3
-"""Construit des paquets Anki (.apkg) à partir des fichiers TSV de flashcards du dépôt.
+"""Construit le paquet Anki de l'étudiant à partir des fichiers TSV de cartes du dépôt.
 
-Format attendu d'un fichier TSV (importable tel quel dans Anki 2.1.55+, ou transformé ici en .apkg) :
+Sorties :
+    exports/anki/francais-PT.apkg          LE fichier à importer dans AnkiDroid (toutes les cartes
+                                            hors échantillons), à réimporter après chaque mise à jour
+    exports/anki/echantillons/<nom>.apkg    un paquet d'essai par fichier de echantillons/
+
+Format d'un fichier TSV (importable tel quel dans Anki 2.1.55+, ou transformé ici en .apkg) :
 
     #separator:tab
     #html:true
     #tags column:3
     #guid column:4
-    #deck:Français PT*::Thème 2 Création::Platon
-    Recto<TAB>Verso<TAB>tags séparés par des espaces<TAB>identifiant (ex. pla-001)
+    #deck:Français PT*::Thème 1 Nature::Verne
+    Recto<TAB>Verso<TAB>tags séparés par des espaces<TAB>identifiant (ex. ver-001)
 
-Les en-têtes #tags, #guid et #deck sont facultatifs.
+Identifiants : l'identifiant du fichier devient celui de la note, comme lors d'un import direct
+du .tsv dans Anki. Réimporter le paquet met donc à jour les cartes existantes (même si la question
+est corrigée ou le fichier renommé) sans doublon et sans perdre l'historique de révision, TANT QUE
+L'IDENTIFIANT NE CHANGE PAS. Sans colonne #guid, l'identifiant est dérivé du paquet et du recto.
+
+Ordre des nouvelles cartes : dans le paquet principal, les cartes des différents fichiers sont
+alternées (une carte de chaque fichier à tour de rôle, dans l'ordre des fichiers), en respectant
+l'ordre d'apprentissage de chaque fichier ; les jeux « Croisements » ne commencent qu'après les
+premières cartes des œuvres. Dans AnkiDroid, régler « Ordre de collecte des nouvelles cartes » sur
+« Position croissante » pour suivre cet ordre (voir exports/anki/README.md).
+
+Retirer une carte déjà importée : ne pas effacer sa ligne ; lui ajouter le tag `retiree`. La carte
+est alors suspendue dans les nouveaux imports et l'étudiant la supprime chez lui en cherchant
+« tag:retiree ». Un identifiant n'est jamais réutilisé.
 
 Usage :
-    python3 outils/construire_anki.py                 # tous les *.tsv du dépôt
-    python3 outils/construire_anki.py chemin/a.tsv    # un ou plusieurs fichiers précis
-
-Sorties : exports/anki/<nom>.apkg (un paquet par fichier) + exports/anki/francais-PT-tout.apkg.
-
-Identifiants : avec une colonne #guid, l'identifiant écrit dans le fichier devient celui de la
-note, exactement comme lors d'un import direct du .tsv dans Anki. Réimporter un paquet mis à
-jour met alors les cartes à jour (même si tu corriges la question ou renommes le fichier) sans
-doublon et sans perdre l'historique de révision, TANT QUE L'IDENTIFIANT NE CHANGE PAS.
-Sans colonne #guid, l'identifiant est dérivé du paquet et du recto : corriger un recto crée
-alors une nouvelle carte (le script le signale).
-
+    python3 outils/construire_anki.py            # construit tout
 Dépendance : pip install genanki
 """
 
-import argparse
 import hashlib
 import pathlib
 import sys
@@ -36,21 +42,25 @@ import sys
 try:
     import genanki
 except ImportError:
-    sys.exit("genanki manquant : lance d'abord  pip install genanki")
+    sys.exit("genanki manquant : lance d'abord  pip install -r outils/requirements.txt")
 
 RACINE = pathlib.Path(__file__).resolve().parent.parent
 SORTIE = RACINE / "exports" / "anki"
 DECK_RACINE = "Français PT*"
+PAQUET_PRINCIPAL = "francais-PT.apkg"
+# Décalage (en « tours » d'alternance) avant l'arrivée des cartes transversales.
+DECALAGE_CROISEMENTS = 8
 
 CSS = """
 .card { font-family: Charter, Georgia, serif; font-size: 20px; line-height: 1.45;
         text-align: left; color: #1d1d1f; background: #fbfaf7; padding: 12px; }
 .recto { font-weight: 600; }
 .verso { margin-top: 10px; }
+.verso small { color: #6b6b6b; font-size: 14px; }
 .tags  { margin-top: 14px; font-size: 13px; color: #6b6b6b; font-family: sans-serif; }
 hr#answer { border: 0; border-top: 1px solid #d0cec8; margin: 14px 0; }
 .nightMode .card, .card.nightMode { color: #ecebe8; background: #1f1f22; }
-.nightMode .tags { color: #a5a5a5; }
+.nightMode .tags, .nightMode .verso small { color: #a5a5a5; }
 """
 
 
@@ -111,46 +121,64 @@ def nom_paquet(chemin: pathlib.Path, entetes) -> str:
     return entetes["deck"] or f"{DECK_RACINE}::{chemin.stem.replace('_', ' ')}"
 
 
-def construire(fichiers):
-    SORTIE.mkdir(parents=True, exist_ok=True)
-    tous_les_paquets, total, toutes_erreurs = [], 0, []
-    for chemin in fichiers:
-        entetes, cartes, erreurs = lire_tsv(chemin)
-        toutes_erreurs += erreurs
+def fichiers_tsv():
+    tous = sorted(p for p in RACINE.rglob("*.tsv") if not {"node_modules", "exports"} & set(p.parts))
+    echantillons = [p for p in tous if "echantillons" in p.parts]
+    principaux = [p for p in tous if p not in echantillons]
+    # Ordre d'alternance : la méthode d'abord, puis les œuvres, les croisements en dernier.
+    principaux.sort(key=lambda p: ("methode" not in p.parts, "transversal" in p.parts, str(p)))
+    return principaux, echantillons
+
+
+def construire_paquet(fichiers, cible: pathlib.Path, alterner: bool):
+    """Écrit un .apkg ; renvoie (nombre de notes, erreurs, détail par sous-paquet)."""
+    decks, erreurs, guids, detail = {}, [], {}, {}
+    file_attente = []  # (clé d'ordre, deck, note)
+    for rang_fichier, chemin in enumerate(fichiers):
+        entetes, cartes, err = lire_tsv(chemin)
+        erreurs += err
         nom = nom_paquet(chemin, entetes)
-        if entetes["guid"] is None:
-            print(f"ℹ {chemin.name} : pas de colonne #guid, identifiants dérivés du recto "
-                  "(corriger un recto créera une nouvelle carte dans Anki)")
-        paquet = genanki.Deck(ident_stable(nom), nom)
-        for recto, verso, tags, guid in cartes:
-            paquet.add_note(genanki.Note(
-                model=MODELE, fields=[recto, verso], tags=tags,
-                guid=guid or genanki.guid_for(nom, recto),
-            ))
-        cible = SORTIE / f"{chemin.stem}.apkg"
-        genanki.Package(paquet).write_to_file(str(cible))
-        print(f"✓ {cible.relative_to(RACINE)} : {len(cartes)} cartes")
-        tous_les_paquets.append(paquet)
-        total += len(cartes)
-    if tous_les_paquets:
-        cible = SORTIE / "francais-PT-tout.apkg"
-        genanki.Package(tous_les_paquets).write_to_file(str(cible))
-        print(f"✓ {cible.relative_to(RACINE)} : {total} cartes au total")
-    for e in toutes_erreurs:
-        print(f"⚠ ligne ignorée — {e}")
-    return 1 if toutes_erreurs else 0
+        decks.setdefault(nom, genanki.Deck(ident_stable(nom), nom))
+        decalage = DECALAGE_CROISEMENTS if alterner and "transversal" in chemin.parts else 0
+        for rang, (recto, verso, tags, guid) in enumerate(cartes):
+            guid = guid or genanki.guid_for(nom, recto)
+            if guid in guids:
+                erreurs.append(f"{chemin.name} : identifiant {guid} déjà utilisé dans {guids[guid]}")
+                continue
+            guids[guid] = chemin.name
+            retiree = "retiree" in tags
+            cle = (rang + decalage, rang_fichier) if alterner else (rang_fichier, rang)
+            file_attente.append((cle, nom, recto, verso, tags, guid, retiree))
+            detail[nom] = detail.get(nom, 0) + (0 if retiree else 1)
+    for position, (_, nom, recto, verso, tags, guid, retiree) in enumerate(sorted(file_attente), start=1):
+        note = genanki.Note(model=MODELE, fields=[recto, verso], tags=tags, guid=guid, due=position)
+        if retiree:
+            for carte in note.cards:
+                carte.suspend = True
+        decks[nom].add_note(note)
+    cible.parent.mkdir(parents=True, exist_ok=True)
+    genanki.Package(list(decks.values())).write_to_file(str(cible))
+    return len(file_attente), erreurs, detail
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("fichiers", nargs="*", type=pathlib.Path)
-    args = parser.parse_args()
-    fichiers = args.fichiers or sorted(
-        p for p in RACINE.rglob("*.tsv") if "node_modules" not in p.parts and "exports" not in p.parts
-    )
-    if not fichiers:
-        sys.exit("Aucun fichier .tsv trouvé.")
-    sys.exit(construire([p.resolve() for p in fichiers]))
+    principaux, echantillons = fichiers_tsv()
+    toutes_erreurs = []
+    if principaux:
+        cible = SORTIE / PAQUET_PRINCIPAL
+        n, err, detail = construire_paquet(principaux, cible, alterner=True)
+        toutes_erreurs += err
+        print(f"✓ {cible.relative_to(RACINE)} : {n} cartes")
+        for nom, k in sorted(detail.items()):
+            print(f"    {nom} : {k}")
+    for chemin in echantillons:
+        cible = SORTIE / "echantillons" / f"{chemin.stem}.apkg"
+        n, err, _ = construire_paquet([chemin], cible, alterner=False)
+        toutes_erreurs += err
+        print(f"✓ {cible.relative_to(RACINE)} : {n} cartes (échantillon, à part)")
+    for e in toutes_erreurs:
+        print(f"⚠ ignoré — {e}")
+    sys.exit(1 if toutes_erreurs else 0)
 
 
 if __name__ == "__main__":
