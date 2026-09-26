@@ -243,7 +243,7 @@ Six prototypes, au statut ÉCHANTILLON. Dis-moi pour chacun ce qu'il faut garder
 
 - **Quoi** : un tableau et une frise simple par récit : les étapes du *Nautilus* ; les saisons du *Mur invisible* (roman sans chapitres, qui couvre environ deux ans et demi, plus le temps où la narratrice rédige son « rapport ») ; l'état de la grande toile et du couple Claude-Christine dans *L'Œuvre*. Tu la reconstitues avant de la regarder. La version HTML cliquable est abandonnée.
 - **Pourquoi** : l'ordre des épisodes aide à localiser un exemple.
-- **Exemple** : les étapes du *Nautilus*, ordre et chapitres à contrôler dans ton édition : forêt sous-marine de l'île Crespo (I, 16-17), Vanikoro et le souvenir de La Pérouse, cimetière de corail, pêcherie de perles de Ceylan (II, 3), tunnel arabique, baie de Vigo, Atlantide (II, 9), pôle Sud, poulpes, Maelström.
+- **Exemple** : les étapes du *Nautilus*, ordre et chapitres à contrôler dans ton édition : forêt sous-marine de l'île Crespo (I, 16-17), Vanikoro et le souvenir de La Pérouse, cimetière de corail, pêcherie de perles de Ceylan (II, 3), tunnel arabique, baie de Vigo, Atlantide (II, 9), pôle Sud, poulpes, Maelstrom.
 
 </details>
 

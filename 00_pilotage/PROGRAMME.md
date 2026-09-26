@@ -21,7 +21,7 @@ L'arrêté du 22 avril 2026 (BO n° 21 de 2026, référence ESRS2611873A) fixe *
 
 | Auteur | Œuvre | Passages / édition | Confiance |
 |--------|-------|--------------------|-----------|
-| Georges **Canguilhem** | *La Connaissance de la vie* (1952, éd. revue 1965, Vrin) | Introduction « La pensée et le vivant » ; I. « Méthode » (« L'expérimentation en biologie animale ») ; III. « Philosophie », chapitres 2 à 5 : « Machine et organisme », « Le vivant et son milieu », « Le normal et le pathologique », « La monstruosité et le monstrueux » | élevée |
+| Georges **Canguilhem** | *La Connaissance de la vie* (Hachette, 1952 ; 2e éd. revue et augmentée, Vrin, 1965, qui ajoute probablement « La monstruosité et le monstrueux » [à vérifier]) | Introduction « La pensée et le vivant » ; I. « Méthode » (« L'expérimentation en biologie animale ») ; III. « Philosophie », chapitres 2 à 5 : « Machine et organisme », « Le vivant et son milieu », « Le normal et le pathologique », « La monstruosité et le monstrueux » | élevée |
 | Jules **Verne** | *Vingt mille lieues sous les mers* (1869-1870) | œuvre intégrale ; édition de référence à préciser | élevée (œuvre) |
 | Marlen **Haushofer** | *Le Mur invisible* (*Die Wand*, 1963) | trad. Liselotte Bodo et Jacqueline Chambon (Actes Sud) | élevée |
 
@@ -92,3 +92,4 @@ Programme :
 | 24/09/2026 | Création : thèmes, œuvres, épreuve Français B, sources | recherche web de la session |
 | 24/09/2026 | Ajouts : éditions prescrites (Platon GF, Woolf Folio classique n° 6764, éditions de Zola) ; thème du texte ; ordres de grandeur ; barème des pénalités ; repères ; règle de décompte ; Français A ; nouvelles sources | vérifications des agents du workflow (échantillons P3 et P4, critique « complétude »), recoupées par recherche web |
 | 26/09/2026 | Coefficient du Français B aux Arts et Métiers (5 à l'admission, extrait du Livret PT 2026, à confirmer) | recherche web de la session, après la réponse de l'étudiant (objectif : Arts et Métiers) |
+| 26/09/2026 | Histoire éditoriale de *La Connaissance de la vie* précisée (Hachette 1952, Vrin 1965) | vérificateur du jeu de cartes Canguilhem (certitude « probable ») |

@@ -77,7 +77,7 @@
 
 **Recentrage du 26/09 (régime 15 min, voir § 0)** : en priorité, dans cet ordre ; le reste de la vague 1 passe « si le temps le permet ».
 
-- [ ] Paquet Anki principal `exports/anki/francais-PT.apkg` : thème 1 (Verne, Canguilhem, Haushofer, croisements) + méthode, rédigé par Claude et doublement vérifié (B2)
+- [x] Paquet Anki principal `exports/anki/francais-PT.apkg` (136 cartes) : thème 1 (Verne, Canguilhem, Haushofer, croisements) + méthode, rédigé par Claude et doublement vérifié (B2)
 - [x] Mode d'emploi AnkiDroid : import, réglages, mises à jour, cartes retirées (`exports/anki/README.md`)
 - [x] Texte intégral de Verne (domaine public) dans `ressources/textes/`, pour vérifier les chapitres
 - [ ] `methode/grille_correction.md` (codes RES, DIS, LAN), prête avant ta première photo de résumé (E1)

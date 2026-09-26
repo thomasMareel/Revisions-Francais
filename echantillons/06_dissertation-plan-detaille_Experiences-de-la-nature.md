@@ -31,7 +31,7 @@ Question fermée en « est-ce » : elle pose une **identité** (faire l'expérie
 
 1. *Expérimenter* : provoquer un phénomène en conditions contrôlées pour tester une hypothèse → Canguilhem, I.
 2. *Explorer* : aller voir ce qu'on ne connaissait que par ouï-dire → Aronnax.
-3. *Éprouver* : subir une épreuve qui transforme ; le latin *experiri*, « essayer », a la même racine que *periculum*, le péril → la narratrice ; le Maelström.
+3. *Éprouver* : subir une épreuve qui transforme ; le latin *experiri*, « essayer », a la même racine que *periculum*, le péril → la narratrice ; le Maelstrom.
 4. *Avoir de l'expérience* : savoir-faire acquis par l'usage → Ned Land ; la narratrice.
 
 **Faire** : ambigu. On *fait* une expérience (on agit), on *fait l'expérience* d'un deuil (on subit) → Nemo agit, Aronnax subit, la narratrice fait les deux.
@@ -68,7 +68,7 @@ Question fermée en « est-ce » : elle pose une **identité** (faire l'expérie
 | Œuvre | Quelle expérience ? | Quelle connaissance ? | Quelle limite ? |
 |---|---|---|---|
 | Canguilhem | Expérimentation ; le vivant dans son milieu | Fonctions ; concepts de milieu, de norme | Le vivant résiste à l'analyse |
-| Verne | Exploration ; épreuves (glaces, poulpes, Maelström) | Inventaire, classification, mesures | Nemo reste une énigme ; l'abîme submerge |
+| Verne | Exploration ; épreuves (glaces, poulpes, Maelstrom) | Inventaire, classification, mesures | Nemo reste une énigme ; l'abîme submerge |
 | Haushofer | Survie, travail, solitude | Savoir-faire, connaissance de soi | Le mur reste inexpliqué |
 
 ### Étape 6 : formuler la problématique (5 min)
@@ -91,7 +91,7 @@ L'introduction engage tout le devoir, et la dernière phrase est celle que le co
 
 ## 2. Introduction rédigée
 
-À la fin de *Vingt mille lieues sous les mers*, Aronnax s'estime l'un des deux seuls hommes, avec Nemo, à pouvoir répondre à la question qu'il attribue à l'Ecclésiaste : « Qui a jamais pu sonder les profondeurs de l'abîme ? » (II, 23) [à vérifier dans ton édition]. Pourtant, il ne sait ni comment il a réchappé du Maelström, ni ce que sont devenus le *Nautilus* et son capitaine : l'expérience la plus extraordinaire le laisse devant une énigme. Faire l'expérience de la nature, est-ce donc la connaître ? La question suppose une identité : éprouver serait déjà savoir.
+À la fin de *Vingt mille lieues sous les mers*, Aronnax s'estime l'un des deux seuls hommes, avec Nemo, à pouvoir répondre à la question qu'il attribue à l'Ecclésiaste : « Qui a jamais pu sonder les profondeurs de l'abîme ? » (II, 23) [à vérifier dans ton édition]. Pourtant, il ne sait ni comment il a réchappé du Maelstrom, ni ce que sont devenus le *Nautilus* et son capitaine : l'expérience la plus extraordinaire le laisse devant une énigme. Faire l'expérience de la nature, est-ce donc la connaître ? La question suppose une identité : éprouver serait déjà savoir.
 
 Or cette expérience prend trois formes. **Expérimenter**, c'est provoquer un phénomène pour contrôler une hypothèse ; **explorer**, aller voir ce qu'on ne connaissait que par ouï-dire ; **éprouver**, subir, comme on fait l'expérience du froid ou de la solitude. Le latin *experiri*, « essayer », partage d'ailleurs sa racine avec *periculum*, le péril. La **nature** est ce qui existe sans l'homme, le vivant surtout, et le milieu où il se trouve plongé ; **connaître**, c'est en rendre raison par des concepts, ou plus modestement en être familier. Mais l'expérience vécue est singulière et parfois écrasante, quand la connaissance exige distance et généralité ; et l'expérimentation risque d'altérer ce qu'elle étudie.
 
@@ -120,7 +120,7 @@ Nous verrons que l'expérience, sous ses trois formes, est la condition de toute
 **3. Éprouver : un savoir que les livres ne donnent pas.**
 - *Argument.* L'épreuve vécue apporte savoir-faire et familiarité : on sait *comment*, et l'on connaît non une espèce, mais *cet* animal.
 - *Verne* : Ned Land, harponneur, ne croit pas au narval géant, parce qu'il a chassé trop de baleines pour s'y laisser prendre (I, 4-5). Il connaît les poissons par leur goût et leur usage ; à terre, il chasse et cuisine pour ses compagnons (I, 21).
-- *Haushofer* : citadine sans compétence, la narratrice apprend par l'erreur et la fatigue à faucher le foin pour Bella, planter pommes de terre et haricots, fendre le bois, chasser le chevreuil. Elle finit par connaître chaque sentier et chacune de ses bêtes (Lynx, Bella, la chatte) dans sa singularité.
+- *Haushofer* : la narratrice apprend par l'erreur et la fatigue à faucher le foin pour Bella, planter pommes de terre et haricots, fendre le bois, chasser le chevreuil. Elle finit par connaître chaque sentier et chacune de ses bêtes (Lynx, Bella, la chatte) dans sa singularité.
 - *Canguilhem*, Introduction : si la connaissance est une manière de résoudre les tensions entre l'homme et son milieu, le savoir-faire de la narratrice en est une forme première, non un sous-savoir [rapprochement proposé ; l'idée est reprise en III.1].
 - → Trois expériences, trois savoirs : la loi, l'inventaire, le savoir-faire.
 
@@ -144,8 +144,8 @@ Nous verrons que l'expérience, sous ses trois formes, est la condition de toute
 
 **3. Trop proche, l'expérience submerge ou détruit.**
 - *Argument.* Violente ou heureuse, l'expérience trop proche abolit la distance nécessaire au savoir : ou le sujet est englouti, ou l'objet est détruit.
-- *Verne* : assaillis par les poulpes (II, 18), les voyageurs ne font plus que survivre ; dans le Maelström, Aronnax perd connaissance (II, 22) : l'épreuve extrême fait, au sens propre, *perdre connaissance*. À l'inverse, Nemo, qui connaît la mer mieux que personne, en fait un instrument de puissance : massacre des cachalots (II, 12), navire de guerre coulé sous les yeux horrifiés d'Aronnax (II, 21).
-- *Haushofer* : à l'alpage, la narratrice vit une dissolution paisible de son moi : elle perd la notion du temps, oublie sa condition, et l'éprouve comme une libération [moment et formulation à vérifier dans ton édition]. Mais cette fusion, si heureuse soit-elle, suspend la distance qu'exige la connaissance [interprétation].
+- *Verne* : assaillis par les poulpes (II, 18), les voyageurs ne font plus que survivre ; dans le Maelstrom, Aronnax perd connaissance (II, 22) : l'épreuve extrême fait, au sens propre, *perdre connaissance*. À l'inverse, Nemo, qui connaît la mer mieux que personne, en fait un instrument de puissance : massacre des cachalots (II, 12), navire de guerre coulé sous les yeux horrifiés d'Aronnax (II, 21).
+- *Haushofer* : à l'alpage, pendant son premier été là-haut, la narratrice vit une dissolution paisible de son moi : elle perd la notion du temps, oublie sa condition, et l'éprouve comme une libération [moment et formulation à vérifier dans ton édition]. Mais cette fusion, si heureuse soit-elle, suspend la distance qu'exige la connaissance [interprétation].
 - → Entre l'engloutissement et la domination, il faut une distance : c'est celle-là même de la connaissance.
 
 > **Transition.** La connaissance exige donc de rompre avec l'expérience brute. Doit-elle pour autant s'en détacher entièrement ? Une science qui oublierait qu'elle est pratiquée par un vivant risquerait de manquer ce qu'elle étudie, comme Nemo, qui connaît la mer sans cesser de la dominer. Reste à penser une connaissance qui reprenne l'expérience au lieu de l'abolir.
@@ -155,13 +155,13 @@ Nous verrons que l'expérience, sous ses trois formes, est la condition de toute
 **1. La connaissance est elle-même une expérience du vivant.**
 - *Argument.* Connaître n'est pas regarder la nature du dehors : c'est la conduite d'un vivant, l'homme, aux prises avec son milieu.
 - *Canguilhem*, Introduction, « La pensée et le vivant » : connaître, c'est analyser ; mais cette analyse est une activité issue de la vie, née des tensions entre l'homme et son milieu. D'où la formule : « la pensée du vivant doit tenir du vivant l'idée du vivant » [à vérifier dans ton édition].
-- *Canguilhem*, III, 3, « Le vivant et son milieu » : reprenant Uexküll, il montre que chaque vivant découpe dans son environnement un milieu propre, centré sur ses besoins ; la tique ne réagit qu'à quelques signaux (lumière, odeur, chaleur). L'univers du savant, qui n'a pas de centre, n'est pas un regard de nulle part : il procède du milieu humain, qu'il nie et réduit [interprétation]. Le chapitre s'achève sur l'idée qu'« un centre ne se résout pas dans son environnement » [à vérifier dans ton édition].
+- *Canguilhem*, III, 3, « Le vivant et son milieu » : reprenant Uexküll, il montre que chaque vivant découpe dans son environnement un milieu propre, centré sur ses besoins ; la tique ne réagit qu'à quelques signaux (odeur, chaleur, contact des poils). L'univers du savant, qui n'a pas de centre, n'est pas un regard de nulle part : il procède du milieu humain, qu'il nie et réduit [interprétation]. Le chapitre s'achève sur l'idée qu'« un centre ne se résout pas dans son environnement » [à vérifier dans ton édition].
 - *Verne* : le *Nautilus* est un milieu humain transporté sous la mer : air renouvelé en surface, électricité tirée du sodium de l'eau de mer (I, 12), repas tirés de l'océan (I, 10). Aronnax ne connaît la mer qu'à partir de ce milieu, derrière la vitre du salon.
 - → L'objectivité n'est pas un regard de nulle part : c'est une expérience rectifiée.
 
 **2. Le récit transforme l'épreuve en savoir.**
 - *Argument.* L'expérience devient connaissance quand elle est reprise, ordonnée, formulée : le récit met à distance sans trahir.
-- *Haushofer* : la narratrice écrit son rapport après les faits, pour ne pas perdre la raison, sans savoir si quelqu'un le lira. Écrire ordonne après coup ce qu'elle a vécu au jour le jour et lui fait comprendre qu'elle est un vivant parmi d'autres, liée à ses bêtes, capable elle-même de tuer. Connaître la nature devient se connaître, ce que Claudel appelle une « co-naissance » (*Art poétique*, 1907).
+- *Haushofer* : la narratrice écrit son récit après les faits, pour ne pas perdre la raison, sans savoir si quelqu'un le lira. Écrire ordonne après coup ce qu'elle a vécu au jour le jour et lui fait comprendre qu'elle est un vivant parmi d'autres, liée à ses bêtes, capable elle-même de tuer. Connaître la nature devient se connaître, ce que Claudel appelle une « co-naissance » (*Art poétique*, 1907).
 - *Verne* : le roman se présente comme le récit rétrospectif d'Aronnax, écrit après l'évasion (II, 23). Son savoir tient moins à ce qu'il a vu qu'à ce qu'il en a fait : observations notées, espèces classées, récit écrit pour être lu.
 - → L'expérience n'est connaissance qu'une fois réfléchie ; mais la réflexion n'a rien à connaître sans elle.
 
@@ -190,9 +190,9 @@ Nous verrons que l'expérience, sous ses trois formes, est la condition de toute
 - **I.3** Éprouver donne un savoir-faire. Ned Land (I, 4-5 ; I, 21) ; la narratrice apprend par l'erreur ; Canguilhem, Introduction (la connaissance naît des tensions avec le milieu).
 - **II.1** Sans concept, l'expérience est aveugle. Le monstrueux avant la tératologie (III, 5) ; Conseil classe, Ned nomme (I, 14) ; l'homme figé derrière le mur.
 - **II.2** L'expérimentation se heurte au vivant. Les quatre difficultés (I) ; machine et organisme (III, 2) ; le musée du *Nautilus* (I, 11).
-- **II.3** Trop proche, l'expérience submerge. Poulpes (II, 18), Maelström (II, 22), Nemo dominateur (II, 12 ; II, 21) ; l'alpage, fusion heureuse mais sans distance.
+- **II.3** Trop proche, l'expérience submerge. Poulpes (II, 18), Maelstrom (II, 22), Nemo dominateur (II, 12 ; II, 21) ; l'alpage, fusion heureuse mais sans distance.
 - **III.1** Connaître est une conduite du vivant. Canguilhem, Introduction et III, 3 (milieu, tique) ; le *Nautilus*, milieu humain sous la mer (I, 10 ; I, 12).
-- **III.2** Le récit transforme l'épreuve en savoir. Le rapport de la narratrice ; le récit rétrospectif d'Aronnax (II, 23).
+- **III.2** Le récit transforme l'épreuve en savoir. Le récit rétrospectif de la narratrice ; celui d'Aronnax (II, 23).
 - **III.3** Connaître le vivant, c'est le reconnaître. Normal et pathologique (III, 4) ; Bella, Lynx, la corneille blanche ; Nemo et les cachalots (II, 12).
 </details>
 
@@ -207,7 +207,7 @@ Expérimenter, explorer, éprouver. Le latin *experiri*, « essayer », a la mê
 <details>
 <summary>2. Quel épisode de Verne fait, au sens propre, « perdre connaissance » ?</summary>
 
-Le Maelström (II, 22) : Aronnax s'évanouit et ne sait pas comment il en a réchappé.
+Le Maelstrom (II, 22) : Aronnax s'évanouit et ne sait pas comment il en a réchappé.
 </details>
 
 <details>
@@ -224,7 +224,7 @@ Spécificité, individualisation, totalité, irréversibilité (I) [à vérifier
 
 ## 4. Conclusion rédigée
 
-Faire l'expérience de la nature, qu'on l'expérimente, qu'on l'explore ou qu'on l'éprouve, est bien la condition de sa connaissance : l'hypothèse d'Aronnax tombe au contact d'une coque de métal, et la narratrice du *Mur invisible* apprend en travaillant ce qu'aucun livre ne lui avait appris. Mais l'expérience ne suffit pas : sans concept, elle reste aveugle, devant le mur comme devant le monstre ; l'expérimentation altère le vivant qu'elle isole ; trop proche, l'expérience engloutit le sujet, ou arme sa volonté de puissance. La connaissance ne consiste pas pour autant à s'arracher à toute expérience : elle est, comme le montre Canguilhem, une conduite du vivant humain dans son milieu, et elle s'accomplit quand l'épreuve est reprise et comprise, dans le récit d'Aronnax comme dans le rapport de la narratrice. Faire l'expérience de la nature n'est donc pas encore la connaître ; mais on ne la connaît vraiment qu'en se souvenant qu'on l'éprouve, et qu'on en fait partie.
+Faire l'expérience de la nature, qu'on l'expérimente, qu'on l'explore ou qu'on l'éprouve, est bien la condition de sa connaissance : l'hypothèse d'Aronnax tombe au contact d'une coque de métal, et la narratrice du *Mur invisible* apprend en travaillant ce qu'aucun livre ne lui avait appris. Mais l'expérience ne suffit pas : sans concept, elle reste aveugle, devant le mur comme devant le monstre ; l'expérimentation altère le vivant qu'elle isole ; trop proche, l'expérience engloutit le sujet, ou arme sa volonté de puissance. La connaissance ne consiste pas pour autant à s'arracher à toute expérience : elle est, comme le montre Canguilhem, une conduite du vivant humain dans son milieu, et elle s'accomplit quand l'épreuve est reprise et comprise, dans le récit d'Aronnax comme dans celui de la narratrice. Faire l'expérience de la nature n'est donc pas encore la connaître ; mais on ne la connaît vraiment qu'en se souvenant qu'on l'éprouve, et qu'on en fait partie.
 
 Cette leçon prend un relief particulier à une époque où nous connaissons la nature par des modèles et des mesures plus que par la fréquentation : une connaissance sans expérience vécue suffit-elle à nous faire prendre soin de ce que nous connaissons ?
 
@@ -237,7 +237,7 @@ Cette leçon prend un relief particulier à une époque où nous connaissons la 
 - Un II qui ne se contente pas de contredire le I, mais montre **pourquoi** l'expérience échoue : défaut de concept, altération du vivant, perte de la distance.
 - Des exemples **localisés et analysés**, avec au moins deux œuvres confrontées par sous-partie.
 - Canguilhem employé comme **outil** (totalité, milieu, normativité) pour éclairer les romans, et les romans pour mettre ses concepts à l'épreuve.
-- Une trouvaille argumentée : *experiri* / *periculum*, ou « perdre connaissance » dans le Maelström.
+- Une trouvaille argumentée : *experiri* / *periculum*, ou « perdre connaissance » dans le Maelstrom.
 - Au format Banque PT, une introduction qui cite la phrase du texte résumé et discute la thèse de son auteur (voir l'encadré de l'Étape 1).
 
 ### Erreurs à éviter sur ce sujet
@@ -274,7 +274,7 @@ Centré sur Canguilhem, III, 2. Le *Nautilus* pris pour un cétacé (I, 2 et I, 
 <details>
 <summary><b>4. « L'expérience de la nature est-elle nécessairement une épreuve ? »</b></summary>
 
-Le sens « péril » passe au premier plan : glaces, poulpes, Maelström ; survie et solitude chez Haushofer ; mais aussi émerveillement (la forêt sous-marine) et contemplation (l'alpage).
+Le sens « péril » passe au premier plan : glaces, poulpes, Maelstrom ; survie et solitude chez Haushofer ; mais aussi émerveillement (la forêt sous-marine) et contemplation (l'alpage).
 </details>
 
 <details>

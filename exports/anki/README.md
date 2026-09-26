@@ -39,13 +39,21 @@ Crée un compte gratuit sur AnkiWeb et utilise **Synchroniser** (*Sync*) dans An
 ## 5. Ce que contient le paquet
 
 <!-- tableau mis à jour par Claude à chaque construction du paquet -->
-| Sous-paquet | Cartes | Contenu |
-|---|---|---|
-| *(rempli à la construction)* | | |
+État au **26/09/2026** : **136 cartes**. À 2 nouvelles cartes par jour, elles arrivent toutes en 10 semaines environ (mi-décembre) ; les cartes du thème 2 s'ajouteront ensuite, au fil du cours.
+
+| Sous-paquet | Cartes | Contenu | Version lisible / imprimable |
+|---|---|---|---|
+| Méthode | 28 | règles du résumé (fourchette, pénalités, énonciation, ordre), de la dissertation (problématique, paragraphe, plan, introduction, conclusion) et 3 points de langue | [.md](../../methode/10_cartes_Methode_resume-dissertation.md) · [PDF](../pdf/methode/10_cartes_Methode_resume-dissertation.pdf) |
+| Thème 1 Nature › Verne | 32 | personnages, *Nautilus*, scènes clés localisées (chapitres vérifiés sur le texte intégral), usages en dissertation | [.md](../../theme1_nature/verne/10_cartes_Verne_Vingt-mille-lieues.md) · [PDF](../pdf/theme1_nature/verne/10_cartes_Verne_Vingt-mille-lieues.pdf) |
+| Thème 1 Nature › Canguilhem | 31 | la thèse de chaque texte au programme, les concepts (milieu, normativité, monstruosité), les formules célèbres, les liens avec les romans | [.md](../../theme1_nature/canguilhem/10_cartes_Canguilhem_Connaissance-de-la-vie.md) · [PDF](../pdf/theme1_nature/canguilhem/10_cartes_Canguilhem_Connaissance-de-la-vie.pdf) |
+| Thème 1 Nature › Haushofer | 27 | situation, animaux, survie, alpage, fin du récit, usages en dissertation | [.md](../../theme1_nature/haushofer/10_cartes_Haushofer_Le-Mur-invisible.md) · [PDF](../pdf/theme1_nature/haushofer/10_cartes_Haushofer_Le-Mur-invisible.pdf) |
+| Thème 1 Nature › Croisements | 18 | les sens de l'intitulé, les confrontations entre œuvres, les dépassements pour la dernière partie | [.md](../../theme1_nature/transversal/10_cartes_Nature_notions-et-croisements.md) · [PDF](../pdf/theme1_nature/transversal/10_cartes_Nature_notions-et-croisements.pdf) |
+
+Ordre d'arrivée : une carte de méthode, puis une de Canguilhem, de Haushofer, de Verne, et ainsi de suite, l'essentiel d'abord ; les croisements commencent après les 8 premières cartes de chaque œuvre.
 
 Les cartes Platon de l'échantillon P2 sont **à part** (`echantillons/`) : ne les importe pas pour l'instant. Elles rejoindront le paquet principal quand ton cours abordera Platon.
 
 ## 6. Si quelque chose cloche
 
 - Message « certaines mises à jour ont été ignorées car le type de note a changé », doublons, carte illisible : dis-le à Claude dans le chat, avec une capture si possible.
-- Les références entre crochets **[non vérifié]** signalent une localisation que Claude n'a pas pu contrôler sur le texte : fie-toi à ton édition et à ton cours.
+- La mention **[non vérifié]** au bas d'une réponse veut dire : référence pas encore confirmée dans **ton** édition. Pour Verne, les chapitres ont déjà été contrôlés sur le texte intégral (édition Hetzel) ; pour Canguilhem et Haushofer, il n'y a pas de texte disponible ici, donc fie-toi d'abord à ton édition et à ton cours. Une formule entre guillemets marquée **[à vérifier dans ton édition]** ne doit pas être recopiée telle quelle en copie avant cette vérification.
